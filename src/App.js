@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Link, NavLink, Redirect, Switch} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import Home from './home/home';
 import './img/bootstrap/css/bootstrap.min.css';

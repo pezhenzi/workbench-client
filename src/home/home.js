@@ -4,14 +4,25 @@ import Header from './header';
 import bench_png from '../img/workbench.png';
 import msg_png from '../img/messages.png';
 import arch_png from '../img/archive.png';
-import Workbench from '../bench/workbench';
 import BenchContainer from '../bench/benchContainer';
 import Statistics from '../stat/statistics';
 import Message from '../msg/message';
+import Login from './login';
+import Register from './register';
 
 class Home extends Component{
     constructor(props){
         super(props);
+        this.state = {};
+    }
+    handleLogin(data){
+        console.log(data);
+    }
+    handleRegister(data){
+        console.log(data);
+    }
+    handleSubmit(data){
+        console.log(data);
     }
 
     render(){
@@ -22,9 +33,15 @@ class Home extends Component{
                         <Route path='/bench' component={BenchContainer}/>
                         <Route path='/stat' component={Statistics}/>
                         <Route path='/msg' component={Message}/>
+                        <Route path='/login' component={Login}/>
+                        <Route path='/register' component={
+                            () => <Register
+                                handleSubmit={this.handleSubmit}
+                            />}
+                        />
                         <Route path='/' render={()=>(
                             <div className="home-main">
-                                <Header />
+                                <Header handleLogin={this.handleLogin} handleRegister={this.handleRegister} />
                                 <div className="doors-container">
                                     <NavLink to='/bench' className='home-door'>
                                         <div>
