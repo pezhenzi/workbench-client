@@ -315,3 +315,20 @@ header h1{
 .btn-group button{
     margin:0 30px;
 }
+.login-form{
+    width:30%;
+    margin:200px auto;
+    display: flex;
+    flex-direction: column;
+}
+.login-form label{
+    text-align:left;
+}
+.login-form input{
+    height:40px;
+    width:100%;
+}
+.login-title{
+    margin:auto;
+    text-align: center;
+}

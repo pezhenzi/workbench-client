@@ -23,7 +23,9 @@ class Workbench extends Component{
         };
         this.home = io.connect('http://10.10.60.47:3000');  //在constructor中说明属性，要加this.
     }
-
+/*最终，所有由socket传来的数据，都必须放在store中，对于应用全局可见。
+* 而不是放在这里，当用户离开这个页面时，就接收不到实时数据了。
+* 也许应该在app.js中监听socket事件。*/
     componentDidMount(){
         let that = this;
         console.log(this.props.testBenchData);
