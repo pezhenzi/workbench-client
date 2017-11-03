@@ -1,14 +1,19 @@
 import Home from './home';
 import {connect} from 'react-redux';
 import {getToken, logout} from "./logAction";
+import {getReports} from "../bench/actions/reportAction";
 
 const mapStateToProps = (state) => {
+    const token = localStorage.user_token ? localStorage.user_token : state.logReducer.token;
+    const name = localStorage.user_name ? localStorage.user_name : state.logReducer.name;
+    const account = localStorage.user_account ? localStorage.user_account : state.logReducer.account;
+    const role = localStorage.user_role ? localStorage.user_role : state.logReducer.role;
     return {
-        token:state.logReducer.token, //state tree的结构是以sub-reducer的名称细分的，logReducer修改的数据归在这个tree的分支下。
+        token:token, //state tree的结构是以sub-reducer的名称细分的，logReducer修改的数据归在这个tree的分支下。
         test:Date.now(),
-        name:state.logReducer.name,
-        account:state.logReducer.account,
-        role:state.logReducer.role,
+        name:name,
+        account:account,
+        role:role,
     }
 };
 
@@ -20,6 +25,9 @@ const mapDispatchToProps = (dispatch) => {
         logout:(token) => {
             dispatch(logout(token));
         },
+        getReports:() => {
+            dispatch(getReports())
+        }
     };
 };
 

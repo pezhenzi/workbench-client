@@ -16,6 +16,8 @@ const reportReducer = (state={report:report,reportId:''}, action) => {
             return {...state, reportId:action.reportId};
         case reportAction.DROP_REPORT:
             return {...state, reportId:action.reportId};
+        case reportAction.GET_REPORTS:
+            return {...state, report:action.data};
         default:
             return state;
     }

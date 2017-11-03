@@ -10,4 +10,14 @@ export const reportAction = {
     USE_REPORT:'USE_REPORT',
     DROP_REPORT:'DROP_REPORT',
     TOP_REPORT:'TOP_REPORT',
+    GET_REPORTS:'GET_REPORTS',
+};
+
+export const cardAction = {
+    ADD_CARD:'ADD_CARD',
+    DROP_CARD:'DROP_CARD',
+    TOP_CARD:'TOP_CARD',
+    COMPLETE_CARD:'COMPLETE_CARD',
+    HANGUP_CARD:'HANGUP_CARD',
+    GET_CARDS:'GET_CARDS',
 };

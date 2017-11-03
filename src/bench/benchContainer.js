@@ -4,14 +4,18 @@ import {addReport} from './actions/reportAction';
 
 const mapStateToProps = (state) => {
     const {title, content} = state.report ? state.report : {title:'', content:''};
+    const token = localStorage.user_token ? localStorage.user_token : state.logReducer.token;
+    const name = localStorage.user_name ? localStorage.user_name : state.logReducer.name;
+    const account = localStorage.user_account ? localStorage.user_account : state.logReducer.account;
+    const role = localStorage.user_role ? localStorage.user_role : state.logReducer.role;
     return {
         testBenchData:`This is some data from benchContainer.`,
         title,
         content,
-        token:state.logReducer.token,
-        name:state.logReducer.name,
-        account:state.logReducer.account,
-        role:state.logReducer.role,
+        token:token,
+        name:name,
+        account:account,
+        role:role,
     }
 };
 

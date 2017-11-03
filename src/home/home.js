@@ -17,9 +17,7 @@ class Home extends Component{
     }
     componentDidMount(){
         console.log(this.props.test);
-        console.log(window.localStorage.getItem("user_name"));
-        console.log(window.localStorage.getItem("user_name"));
-        console.log(window.localStorage.getItem("user_name"));
+        this.props.getReports();
     }
     handleLogin(data){
         console.log(data);
