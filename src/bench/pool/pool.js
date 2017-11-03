@@ -7,7 +7,22 @@ import { Icon } from 'antd';
 class Pool extends Component{
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            reportData:[],
+        }
+    }
+    componentDidMount(){
+        if(localStorage.reportData){
+            const reports = JSON.parse(localStorage.reportData);
+            this.setState({
+                reportData:[reports],
+            });
+            console.log(reports);
+        } else{
+            this.setState({
+                reportData:this.props.reports,
+            })
+        }
     }
     handleUse(e){
         this.props.onUse(e.target.title); //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
@@ -18,18 +33,15 @@ class Pool extends Component{
     handleDrop(e){
         this.props.onDrop(e.target.title);
     }
-    componentDidMount(){
-        console.log(this.props);
-    }
 
     render(){
         let used = this.props.used;
         let dropped = this.props.dropped;
         let topped = this.props.topped;
-        if(this.props.reports){
+        if(this.state.reportData){
             return (
                 <div>
-                    {this.props.reports.map((item,index) =>
+                    {this.state.reportData.map((item,index) =>
                         <div className='pool-block' key={index}>
                             <div className="widget-action">
                                 <li title={item.reportId} onClick={this.handleDrop.bind(this)}>Drop</li>

@@ -25,7 +25,9 @@ class Workbench extends Component{
     }
 /*最终，所有由socket传来的数据，都必须放在store中，对于应用全局可见。
 * 而不是放在这里，当用户离开这个页面时，就接收不到实时数据了。
-* 也许应该在app.js中监听socket事件。*/
+* 也许应该在app.js中监听socket事件。
+*
+* 纠正：不但要放在store中，还要存储在local Storage中，否则如果用户有意或无意关闭页面或浏览器，store就清空了！*/
     componentDidMount(){
         let that = this;
         console.log(this.props.testBenchData);
@@ -43,6 +45,8 @@ class Workbench extends Component{
                     reports:[...prevState.reports, data],
                 }
             });
+            const reportFormDataString = JSON.stringify(data);
+            localStorage.setItem('reportData', reportFormDataString);
         });
     }
     showModal = () => {
@@ -51,11 +55,12 @@ class Workbench extends Component{
         });
     };
     handleOk = (e) => {
+        const author = localStorage.user_name || this.props.name || `佚名`;
         let reportFormData = {
             title:this.titleInput.value,
             content:this.contentInput.value,
-            author:`someone`,
-            reportId:idGenerator('libai'),
+            author:author,
+            reportId:idGenerator(author),
         };
         this.home.emit('add report', reportFormData);
         this.setState((prevState,props)=>{
@@ -65,7 +70,10 @@ class Workbench extends Component{
             }
         }, ()=>{console.log(this.state.reports);});
 
-        this.props.testAddReport(reportFormData);
+        //TODO：把report数据保存到localStorage。对象须先序列化为字符串。
+        const reportFormDataString = JSON.stringify(reportFormData);
+        localStorage.setItem('reportData', reportFormDataString);
+
         this.reportForm.reset();
     };
     handleCancel = (e) => {

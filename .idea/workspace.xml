@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed3835fd-9111-42e4-a14d-7bafbb04477f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/bench/benchReducer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bench/actions/reportAction.js" afterPath="$PROJECT_DIR$/src/bench/actions/reportAction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bench/benchContainer.js" afterPath="$PROJECT_DIR$/src/bench/benchContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/constants/actionType.js" afterPath="$PROJECT_DIR$/src/constants/actionType.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/home/home.js" afterPath="$PROJECT_DIR$/src/home/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/home/homeContainer.js" afterPath="$PROJECT_DIR$/src/home/homeContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/home/homeReducer.js" afterPath="$PROJECT_DIR$/src/home/homeReducer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bench/pool/pool.js" afterPath="$PROJECT_DIR$/src/bench/pool/pool.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bench/workbench.js" afterPath="$PROJECT_DIR$/src/bench/workbench.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,7 +25,7 @@
       <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/home/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="984">
               <caret line="83" column="32" lean-forward="false" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -42,8 +38,8 @@
       <file leaf-file-name="homeContainer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/home/homeContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="9" column="89" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="9" selection-end-column="89" />
+            <state relative-caret-position="672">
+              <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -51,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reportAction.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="reportAction.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/bench/actions/reportAction.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="33" column="2" lean-forward="true" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
+            <state relative-caret-position="648">
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -74,7 +70,7 @@
       <file leaf-file-name="homeReducer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/home/homeReducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
+            <state relative-caret-position="516">
               <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
@@ -83,11 +79,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="benchContainer.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="workbench.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bench/workbench.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="985">
+              <caret line="51" column="23" lean-forward="true" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pool.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/bench/pool/pool.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="benchContainer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bench/benchContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+            <state relative-caret-position="696">
+              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -111,7 +129,6 @@
         <option value="$PROJECT_DIR$/src/widget.js" />
         <option value="$PROJECT_DIR$/src/bench/cards/card.js" />
         <option value="$PROJECT_DIR$/src/bench/report.js" />
-        <option value="$PROJECT_DIR$/src/bench/pool/pool.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/bench/actions/logAction.js" />
@@ -121,14 +138,15 @@
         <option value="$PROJECT_DIR$/src/home/register.js" />
         <option value="$PROJECT_DIR$/src/home/header.js" />
         <option value="$PROJECT_DIR$/src/home/logAction.js" />
-        <option value="$PROJECT_DIR$/src/bench/workbench.js" />
-        <option value="$PROJECT_DIR$/src/bench/actions/reportAction.js" />
         <option value="$PROJECT_DIR$/src/constants/actionType.js" />
         <option value="$PROJECT_DIR$/src/bench/benchReducer.js" />
         <option value="$PROJECT_DIR$/src/home/homeReducer.js" />
         <option value="$PROJECT_DIR$/src/home/home.js" />
         <option value="$PROJECT_DIR$/src/home/homeContainer.js" />
         <option value="$PROJECT_DIR$/src/bench/benchContainer.js" />
+        <option value="$PROJECT_DIR$/src/bench/workbench.js" />
+        <option value="$PROJECT_DIR$/src/bench/pool/pool.js" />
+        <option value="$PROJECT_DIR$/src/bench/actions/reportAction.js" />
       </list>
     </option>
   </component>
@@ -193,6 +211,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="bench" type="462c0819:PsiDirectoryNode" />
               <item name="actions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="workbench-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="workbench-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="bench" type="462c0819:PsiDirectoryNode" />
+              <item name="pool" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="workbench-client" type="b2602c69:ProjectViewProjectNode" />
@@ -278,7 +303,7 @@
       <workItem from="1509412452899" duration="7464000" />
       <workItem from="1509498751480" duration="14208000" />
       <workItem from="1509584902744" duration="14028000" />
-      <workItem from="1509671141037" duration="9152000" />
+      <workItem from="1509671141037" duration="12113000" />
     </task>
     <task id="LOCAL-00001" summary="20171030">
       <created>1509331177381</created>
@@ -301,13 +326,20 @@
       <option name="project" value="LOCAL" />
       <updated>1509671996889</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="20171030">
+      <created>1509699110277</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1509699110277</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="209879000" />
+    <option name="totallyTimeSpent" value="212840000" />
   </component>
-  <component name="TodoView" selected-index="2">
+  <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -322,6 +354,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15694591" sideWeight="0.49399656" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988507" sideWeight="0.49787912" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988507" sideWeight="0.5021209" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32988507" sideWeight="0.4957582" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15694591" sideWeight="0.50600344" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -334,7 +367,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -592,13 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bench/pool/pool.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="40" column="78" lean-forward="false" selection-start-line="40" selection-start-column="78" selection-end-line="40" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -730,27 +755,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/home/homeReducer.js">
+    <entry file="file://$PROJECT_DIR$/src/bench/benchContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+        <state relative-caret-position="696">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bench/workbench.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="985">
+          <caret line="51" column="23" lean-forward="true" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bench/actions/reportAction.js">
+    <entry file="file://$PROJECT_DIR$/src/bench/pool/pool.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="33" column="2" lean-forward="true" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
+        <state relative-caret-position="528">
+          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/home/home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="984">
           <caret line="83" column="32" lean-forward="false" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -759,30 +792,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bench/workbench.js">
+    <entry file="file://$PROJECT_DIR$/src/home/homeReducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="153" column="34" lean-forward="true" selection-start-line="153" selection-start-column="34" selection-end-line="153" selection-end-column="34" />
+        <state relative-caret-position="516">
+          <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/home/homeContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="89" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="9" selection-end-column="89" />
+        <state relative-caret-position="672">
+          <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bench/benchContainer.js">
+    <entry file="file://$PROJECT_DIR$/src/bench/actions/reportAction.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        <state relative-caret-position="648">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
