@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
-import Home from './home/home';
+import HomeContainer from './home/homeContainer';
 import './img/bootstrap/css/bootstrap.min.css';
 import './img/font-awesome/css/font-awesome.min.css';
 import './App.css';
@@ -16,7 +16,7 @@ class App extends Component {
     render() {
       return (
           <div className='container'>
-              <Home />
+              <HomeContainer />
           </div>
       )
   }

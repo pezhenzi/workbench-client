@@ -15,6 +15,12 @@ class Home extends Component{
         super(props);
         this.state = {};
     }
+    componentDidMount(){
+        console.log(this.props.test);
+        console.log(window.localStorage.getItem("user_name"));
+        console.log(window.localStorage.getItem("user_name"));
+        console.log(window.localStorage.getItem("user_name"));
+    }
     handleLogin(data){
         console.log(data);
     }
@@ -24,7 +30,7 @@ class Home extends Component{
     handleSubmit(data){
         console.log(data);
     }
-
+    //TODO:render the component.
     render(){
         return (
             <div className="home-container">
@@ -33,15 +39,19 @@ class Home extends Component{
                         <Route path='/bench' component={BenchContainer}/>
                         <Route path='/stat' component={Statistics}/>
                         <Route path='/msg' component={Message}/>
-                        <Route path='/login' component={Login}/>
-                        <Route path='/register' component={
-                            () => <Register
-                                handleSubmit={this.handleSubmit}
-                            />}
-                        />
-                        <Route path='/' render={()=>(
+                        <Route path='/login' component={() => <Login getToken={this.props.getToken} />}/>
+                        <Route path='/register' component={() => <Register handleSubmit={this.handleSubmit}/>}/>
+                        <Route path='/' render={()=>this.props.token ? (
                             <div className="home-main">
-                                <Header handleLogin={this.handleLogin} handleRegister={this.handleRegister} />
+                                <Header
+                                    handleLogin={this.handleLogin}
+                                    handleRegister={this.handleRegister}
+                                    name={this.props.name}
+                                    account={this.props.account}
+                                    token={this.props.token}
+                                    role={this.props.role}
+                                    logout={this.props.logout}
+                                />
                                 <div className="doors-container">
                                     <NavLink to='/bench' className='home-door'>
                                         <div>
@@ -72,7 +82,17 @@ class Home extends Component{
                                     </NavLink>
                                 </div>
                             </div>
-                        )} />
+                        ) : (<div>
+                            <Header
+                                handleLogin={this.handleLogin}
+                                handleRegister={this.handleRegister}
+                                name={this.props.name}
+                                account={this.props.account}
+                                token={this.props.token}
+                                role={this.props.role}
+                                logout={this.props.logout}
+                            />
+                            <h1>请先登录，如果还没有账号请先注册。</h1></div>)} />
                     </Switch>
                 </Router>
             </div>

@@ -3,11 +3,15 @@ import Workbench from './workbench';
 import {addReport} from './actions/reportAction';
 
 const mapStateToProps = (state) => {
-    const {title, content} = state.report;
+    const {title, content} = state.report ? state.report : {title:'', content:''};
     return {
         testBenchData:`This is some data from benchContainer.`,
         title,
         content,
+        token:state.logReducer.token,
+        name:state.logReducer.name,
+        account:state.logReducer.account,
+        role:state.logReducer.role,
     }
 };
 

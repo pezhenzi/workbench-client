@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 class Register extends Component{
     constructor(props){
@@ -7,7 +7,6 @@ class Register extends Component{
         this.state = {};
     }
     handleSubmit(e){
-        e.preventDefault();
         const registerData = {
             name:this.nameInput.value,
             account:this.accountInput.value,
@@ -62,7 +61,9 @@ class Register extends Component{
                         <input type="password" required minLength='6' maxLength='12' size='12' ref={(input) => this.passwordAgainInput = input}/>
                     </div>
                     <div className="form-group btn-group">
-                        <button className='btn btn-success btn-lg' onClick={this.handleSubmit.bind(this)}>提交</button>
+                        <Link to={'/'}>
+                            <button className='btn btn-success btn-lg' onClick={this.handleSubmit.bind(this)}>提交</button>
+                        </Link>
                         <Link to='/'>
                             <button className='btn btn-warning btn-lg'>放弃</button>
                         </Link>

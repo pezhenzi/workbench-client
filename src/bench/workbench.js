@@ -147,7 +147,15 @@ class Workbench extends Component{
         };
         return (
             <div>
-                <Header/>
+                <Header
+                    handleLogin={this.handleLogin}
+                    handleRegister={this.handleRegister}
+                    name={this.props.name}
+                    account={this.props.account}
+                    token={this.props.token}
+                    role={this.props.role}
+                    logout={this.props.logout}
+                />
                 <div className="header-btn-group">
                     <Button ghost onClick={this.showModal}>我要报题</Button>
                     <Button ghost>归档区</Button>
@@ -219,7 +227,7 @@ class Workbench extends Component{
                         })}
                     </div>
                 </div>
-                <Link className="return-home" to="/">{this.props.title}</Link>
+                <Link className="return-home" to="/">返回主页</Link>
             </div>
         )
     }

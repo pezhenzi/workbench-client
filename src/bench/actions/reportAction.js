@@ -1,4 +1,4 @@
-import * as REPORT from '../../constants/actionType';
+import {reportAction as REPORT} from '../../constants/actionType';
 
 //无论来自本地form的数据，还是来自socket事件的数据，都用这个action。
 export const addReport = (data) => ({
