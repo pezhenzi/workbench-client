@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import { Button } from 'antd';
 
 class Header extends Component{
     constructor(props){
@@ -9,7 +8,7 @@ class Header extends Component{
     }
 
     componentDidMount(){
-        console.log(this.props.name);
+        //console.log(this.props.name);
     }
     handleLogin(e){
         this.props.handleLogin(`login`);

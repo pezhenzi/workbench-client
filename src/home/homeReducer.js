@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {reportAction, logAction} from '../constants/actionType.js';
+import appSocketReducer from '../appSocketReducer';
 
 const report = {
     title:`spared title`,
@@ -59,6 +60,7 @@ const logReducer = (state={token:'',name:'',account:''}, action) => {
 const homeReducer = combineReducers({
     reportReducer,
     logReducer,
+    appSocketReducer,
 });
 
 export default homeReducer;

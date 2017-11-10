@@ -29,9 +29,9 @@ export const getReports = (data) => {
     return function(dispatch){
         return fetch('http://10.10.60.47:3000/report/get-reports')
             .then((response) => response.json())
-            .then((response) => dispatch(addReport(response))); //TODO:把得到的reports数据存入localStorage。
+            .then((response) => {
+            dispatch(addReport(response));
+            localStorage.setItem('newReports',JSON.stringify(response));
+        });
     }
 };
-
-
-

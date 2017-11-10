@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Route, NavLink, Switch} from 'react-router-dom';
+//mport {Link, Route, NavLink, Switch} from 'react-router-dom';
 import { Icon } from 'antd';
 
 export const Pencil = (props) => (
@@ -17,6 +17,7 @@ export const Clip = (props) => (
 export class PoolAction extends Component{
     constructor(props){
         super(props);
+        this.state = {};
     }
     handleDrop(){
         this.props.drop(`it dropped!`);

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Route, NavLink, Switch} from 'react-router-dom';
+//import {Link, Route, NavLink, Switch} from 'react-router-dom';
 import bgi from '../../img/circle.png';
 import { Icon } from 'antd';
 import {Pencil, Clip} from '../../widget';
@@ -7,10 +7,11 @@ import {Pencil, Clip} from '../../widget';
 class Card extends Component{
     constructor(props){
         super(props);
+        this.state = {};
     }
 
     render(){
-        const {title, content, members, document, accessory, comments, progress} = this.props.data;
+        const {title, content, document, accessory, comments, progress} = this.props.data;
         return (
             <div className="card-wrap">
                 <div className="card-item card-title">

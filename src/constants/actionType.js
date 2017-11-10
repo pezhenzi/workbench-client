@@ -21,3 +21,8 @@ export const cardAction = {
     HANGUP_CARD:'HANGUP_CARD',
     GET_CARDS:'GET_CARDS',
 };
+
+export const socketAction = {
+    RECEIVE_REPORT:'RECEIVE_REPORT',
+    RECEIVE_MESSAGE:'RECEIVE_MESSAGE',
+};

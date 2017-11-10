@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Link, Route, NavLink, Switch} from 'react-router-dom';
+import {Link, Route, NavLink} from 'react-router-dom';
 import Header from '../home/header';
-import { Menu, Icon, Button, Modal, Input, Upload, message, } from 'antd';
+import { Menu, Icon, Button, Modal} from 'antd';
 import Pool from './pool/pool';
 import Flow from './pool/flow';
 import Members from './pool/members';
@@ -21,7 +21,7 @@ class Workbench extends Component{
             reports:[],
             usedId:[],
         };
-        this.home = io.connect('http://10.10.60.47:3000');  //在constructor中说明属性，要加this.
+        this.home = io.connect('http://10.10.60.47:3000');  //在constructor中声明属性，要加this.
     }
 /*最终，所有由socket传来的数据，都必须放在store中，对于应用全局可见。
 * 而不是放在这里，当用户离开这个页面时，就接收不到实时数据了。
@@ -30,11 +30,11 @@ class Workbench extends Component{
 * 纠正：不但要放在store中，还要存储在local Storage中，否则如果用户有意或无意关闭页面或浏览器，store就清空了！*/
     componentDidMount(){
         let that = this;
-        console.log(this.props.testBenchData);
-        console.log(this.props.title);
+        //console.log(this.props.testBenchData);
+        //console.log(this.props.title);
         this.props.testBenchDispatch();
         this.home.on('news', function(data){
-            console.log(data);
+            //console.log(data);
 
         });
         this.home.emit('from react', {msg:`thi is one message come from react client.`});
@@ -70,7 +70,6 @@ class Workbench extends Component{
             }
         }, ()=>{console.log(this.state.reports);});
 
-        //TODO：把report数据保存到localStorage。对象须先序列化为字符串。
         const reportFormDataString = JSON.stringify(reportFormData);
         localStorage.setItem('reportData', reportFormDataString);
 
@@ -135,24 +134,6 @@ class Workbench extends Component{
         })
     }
     render(){
-        const { TextArea } = Input;
-        const props = {
-            name: 'file',
-            action: '//jsonplaceholder.typicode.com/posts/',
-            headers: {
-                authorization: 'authorization-text',
-            },
-            onChange(info) {
-                if (info.file.status !== 'uploading') {
-                    console.log(info.file, info.fileList);
-                }
-                if (info.file.status === 'done') {
-                    message.success(`${info.file.name} file uploaded successfully`);
-                } else if (info.file.status === 'error') {
-                    message.error(`${info.file.name} file upload failed.`);
-                }
-            },
-        };
         return (
             <div>
                 <Header
@@ -222,7 +203,7 @@ class Workbench extends Component{
                                    onUse={this.handleOnUse.bind(this)}
                                    onTop={this.handleOnTop.bind(this)}
                                    onDrop={this.handleOnDrop.bind(this)}
-
+                                   reportSocket={this.props.reportSocket}
                                />} />
                         <Route path='/bench/flow' component={Flow}/>
                         <Route path='/bench/members' component={Members}/>

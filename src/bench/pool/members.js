@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import member1 from '../../img/member1.jpg';
 import member2 from '../../img/member2.jpg';
 import member3 from '../../img/member3.jpg';
@@ -8,6 +7,7 @@ import member4 from '../../img/member4.jpg';
 class Members extends Component{
     constructor(props){
         super(props);
+        this.state = {};
     }
 
     render(){

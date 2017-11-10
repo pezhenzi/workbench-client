@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import { Icon } from 'antd';
 /*reports数据只要通过props更新即可，
 * 不必在这个子组件中使用state维护reports，
@@ -12,17 +11,21 @@ class Pool extends Component{
         }
     }
     componentDidMount(){
+        //TODO:务必厘清这里的数据更新流程！
         if(localStorage.reportData){
-            const reports = JSON.parse(localStorage.reportData);
+            const reports = JSON.parse(localStorage.newReports);
             this.setState({
-                reportData:[reports],
+                reportData:reports.data,
             });
-            console.log(reports);
-        } else{
-            this.setState({
-                reportData:this.props.reports,
-            })
+            //console.log(reports.data);
+            if(this.props.reportSocket){
+                this.setState({
+                    reportData:[...this.state.reportData, this.props.reportSocket],
+                }, function(){console.log('白日依山尽')});
+            }
         }
+
+
     }
     handleUse(e){
         this.props.onUse(e.target.title); //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
@@ -35,30 +38,22 @@ class Pool extends Component{
     }
 
     render(){
-        let used = this.props.used;
-        let dropped = this.props.dropped;
-        let topped = this.props.topped;
-        if(this.state.reportData){
-            return (
-                <div>
-                    {this.state.reportData.map((item,index) =>
-                        <div className='pool-block' key={index}>
-                            <div className="widget-action">
-                                <li title={item.reportId} onClick={this.handleDrop.bind(this)}>Drop</li>
-                                <li title={item.reportId} onClick={this.handleTop.bind(this)}>Top</li>
-                                <li title={item.reportId} onClick={this.handleUse.bind(this)}>Use</li>
-                            </div>
-                            <div><b>{item.title}</b></div>
-                            <div>{item.content}</div>
-                            <div><Icon type='user'/><i>{item.author}</i></div>
+        return (
+            <div>
+                {this.state.reportData.map((item,index) =>
+                    <div className='pool-block' key={index}>
+                        <div className="widget-action">
+                            <li title={item.reportId} onClick={this.handleDrop.bind(this)}>Drop</li>
+                            <li title={item.reportId} onClick={this.handleTop.bind(this)}>Top</li>
+                            <li title={item.reportId} onClick={this.handleUse.bind(this)}>Use</li>
                         </div>
-                    )}
-                </div>
-            )
-        } else{
-            return <div><span>No data</span></div>
-        }
-
+                        <div><b>{item.title}</b></div>
+                        <div>{item.content}</div>
+                        <div><Icon type='user'/><i>{item.author}</i></div>
+                    </div>
+                )}
+            </div>
+        )
     }
 }
 

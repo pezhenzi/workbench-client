@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link, NavLink, Redirect, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
 import Header from './header';
 import bench_png from '../img/workbench.png';
 import msg_png from '../img/messages.png';
@@ -16,7 +16,7 @@ class Home extends Component{
         this.state = {};
     }
     componentDidMount(){
-        console.log(this.props.test);
+        //console.log(this.props.test);
         this.props.getReports();
     }
     handleLogin(data){
