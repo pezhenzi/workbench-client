@@ -7,25 +7,11 @@ class Pool extends Component{
     constructor(props){
         super(props);
         this.state = {
-            reportData:[],
         }
     }
     componentDidMount(){
-        //TODO:务必厘清这里的数据更新流程！
-        if(localStorage.reportData){
-            const reports = JSON.parse(localStorage.newReports);
-            this.setState({
-                reportData:reports.data,
-            });
-            //console.log(reports.data);
-            if(this.props.reportSocket){
-                this.setState({
-                    reportData:[...this.state.reportData, this.props.reportSocket],
-                }, function(){console.log('白日依山尽')});
-            }
-        }
-
-
+        console.log(JSON.parse(localStorage.localReports));
+        console.log(this.props.newReportFromSocket);
     }
     handleUse(e){
         this.props.onUse(e.target.title); //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
@@ -37,23 +23,36 @@ class Pool extends Component{
         this.props.onDrop(e.target.title);
     }
 
+    componentWillUnmount(){
+        //TODO:如何决定是否需要从localStorage恢复数据。
+    /*当组件被卸载时，在localStorage中改变组件的状态属性 如poolStatus:unmounted,
+    * 当组件挂载时，检查localStorage中的status属性，根据其值决定是否要将localStorage中的
+    * localReports通过reducer加入到redux的store中。
+    * 也就是说，组件挂载时，先检查其状态，再决定是否需要从localStorage恢复数据。*/
+    }
+
     render(){
-        return (
-            <div>
-                {this.state.reportData.map((item,index) =>
-                    <div className='pool-block' key={index}>
-                        <div className="widget-action">
-                            <li title={item.reportId} onClick={this.handleDrop.bind(this)}>Drop</li>
-                            <li title={item.reportId} onClick={this.handleTop.bind(this)}>Top</li>
-                            <li title={item.reportId} onClick={this.handleUse.bind(this)}>Use</li>
+        if(this.props.newReportFromSocket){
+            return (
+                <div>
+                    {this.props.newReportFromSocket.map((item,index) =>
+                        <div className='pool-block' key={index}>
+                            <div className="widget-action">
+                                <li title={item.reportId} onClick={this.handleDrop.bind(this)}>Drop</li>
+                                <li title={item.reportId} onClick={this.handleTop.bind(this)}>Top</li>
+                                <li title={item.reportId} onClick={this.handleUse.bind(this)}>Use</li>
+                            </div>
+                            <div><b>{item.title}</b></div>
+                            <div>{item.content}</div>
+                            <div><Icon type='user'/><i>{item.author}</i></div>
                         </div>
-                        <div><b>{item.title}</b></div>
-                        <div>{item.content}</div>
-                        <div><Icon type='user'/><i>{item.author}</i></div>
-                    </div>
-                )}
-            </div>
-        )
+                    )}
+                </div>
+            );
+        } else{
+            return (<div></div>);
+        }
+
     }
 }
 

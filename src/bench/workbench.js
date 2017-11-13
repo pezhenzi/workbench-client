@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link, Route, NavLink} from 'react-router-dom';
 import Header from '../home/header';
 import { Menu, Icon, Button, Modal} from 'antd';
-import Pool from './pool/pool';
+import PoolContainer from './pool/poolContainer';
 import Flow from './pool/flow';
 import Members from './pool/members';
 import Card from './cards/card';
@@ -38,7 +38,8 @@ class Workbench extends Component{
 
         });
         this.home.emit('from react', {msg:`thi is one message come from react client.`});
-        this.home.on('new report from others', function(data){
+        /*此处该为在app.js中接收socket数据
+        * this.home.on('new report from others', function(data){
             console.log(data);
             that.setState((prevState)=>{
                 return {
@@ -47,7 +48,7 @@ class Workbench extends Component{
             });
             const reportFormDataString = JSON.stringify(data);
             localStorage.setItem('reportData', reportFormDataString);
-        });
+        });*/
     }
     showModal = () => {
         this.setState({
@@ -198,7 +199,7 @@ class Workbench extends Component{
                         </Menu>
                         {/*注意在react-router中向Route要渲染的子组件传递props的方法。*/}
                         <Route path='/bench/pool'
-                               component={() => <Pool
+                               component={() => <PoolContainer
                                    reports={this.state.reports}
                                    onUse={this.handleOnUse.bind(this)}
                                    onTop={this.handleOnTop.bind(this)}
