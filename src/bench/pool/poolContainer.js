@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        reportsData:state.initialReports.oldReports.data ? state.initialReports.oldReports.data : [],
+        reportsData:state.initialReports.oldReports ? state.initialReports.oldReports : [],
     };
 };
 
