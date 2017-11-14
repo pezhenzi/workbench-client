@@ -1,4 +1,4 @@
-import {socketAction} from "./constants/actionType";
+/*import {socketAction} from "./constants/actionType";
 
 export const receiveReportSocket = (data) => ({
     type:socketAction.RECEIVE_REPORT,
@@ -10,4 +10,4 @@ export const receiveMessage = (data) => ({
     type:socketAction.RECEIVE_MESSAGE,
     message:data,
     timeStamp:Date.now(),
-});
+});*/

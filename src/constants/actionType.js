@@ -1,3 +1,9 @@
+export const appAction = {
+    INITIAL_REPORTS:'INITIAL_REPORTS',
+    RECEIVE_REPORT_SOCKET:'RECEIVE_REPORT_SOCKET',
+    RECEIVE_MESSAGE:'RECEIVE_MESSAGE',
+};
+
 export const logAction = {
     REGISTER:'REGISTER',
     LOGIN:'LOGIN',
@@ -20,9 +26,4 @@ export const cardAction = {
     COMPLETE_CARD:'COMPLETE_CARD',
     HANGUP_CARD:'HANGUP_CARD',
     GET_CARDS:'GET_CARDS',
-};
-
-export const socketAction = {
-    RECEIVE_REPORT:'RECEIVE_REPORT',
-    RECEIVE_MESSAGE:'RECEIVE_MESSAGE',
 };

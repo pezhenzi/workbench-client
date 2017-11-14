@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import {createLogger} from 'redux-logger';
 import './index.css';
 import AppContainer from './appContainer';
-import rootReducer from './home/homeReducer';
+import rootReducer from './appReducer';
 import registerServiceWorker from './registerServiceWorker';
 
 const middleWare = [thunk, createLogger()];

@@ -1,7 +1,6 @@
 import Home from './home';
 import {connect} from 'react-redux';
 import {getToken, logout} from "./logAction";
-import {getReports} from "../bench/actions/reportAction";
 
 const mapStateToProps = (state) => {
     const token = localStorage.user_token ? localStorage.user_token : state.logReducer.token;
@@ -24,9 +23,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         logout:(token) => {
             dispatch(logout(token));
-        },
-        getReports:() => {
-            dispatch(getReports())
         }
     };
 };

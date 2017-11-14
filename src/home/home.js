@@ -17,7 +17,6 @@ class Home extends Component{
     }
     componentDidMount(){
         //console.log(this.props.test);
-        this.props.getReports();
     }
     handleLogin(data){
         console.log(data);

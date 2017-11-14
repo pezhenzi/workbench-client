@@ -1,6 +1,6 @@
 import App from './App';
 import {connect} from 'react-redux';
-import {receiveReportSocket} from './appSocketAction';
+import {getInitialReports, receiveReportSocket} from "./appAction";
 
 const mapStateToProps = (state) => {
     return {
@@ -10,11 +10,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        testDispatch:() => {
-            console.log(`Test dispatch from appContainer.`);
-        },
         receiveReportSocket:(reportData) => {
             dispatch(receiveReportSocket(reportData));
+        },
+        getInitialReports:() => {
+            dispatch(getInitialReports());
         },
     }
 };

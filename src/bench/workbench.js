@@ -23,32 +23,15 @@ class Workbench extends Component{
         };
         this.home = io.connect('http://10.10.60.47:3000');  //在constructor中声明属性，要加this.
     }
-/*最终，所有由socket传来的数据，都必须放在store中，对于应用全局可见。
-* 而不是放在这里，当用户离开这个页面时，就接收不到实时数据了。
-* 也许应该在app.js中监听socket事件。
-*
-* 纠正：不但要放在store中，还要存储在local Storage中，否则如果用户有意或无意关闭页面或浏览器，store就清空了！*/
+
     componentDidMount(){
         let that = this;
-        //console.log(this.props.testBenchData);
-        //console.log(this.props.title);
+
         this.props.testBenchDispatch();
         this.home.on('news', function(data){
             //console.log(data);
-
         });
         this.home.emit('from react', {msg:`thi is one message come from react client.`});
-        /*此处该为在app.js中接收socket数据
-        * this.home.on('new report from others', function(data){
-            console.log(data);
-            that.setState((prevState)=>{
-                return {
-                    reports:[...prevState.reports, data],
-                }
-            });
-            const reportFormDataString = JSON.stringify(data);
-            localStorage.setItem('reportData', reportFormDataString);
-        });*/
     }
     showModal = () => {
         this.setState({
@@ -62,18 +45,10 @@ class Workbench extends Component{
             content:this.contentInput.value,
             author:author,
             reportId:idGenerator(author),
+            status:'new',
         };
         this.home.emit('add report', reportFormData);
-        this.setState((prevState,props)=>{
-            return {
-                visible: false,
-                reports:[...prevState.reports, reportFormData],
-            }
-        }, ()=>{console.log(this.state.reports);});
-
-        const reportFormDataString = JSON.stringify(reportFormData);
-        localStorage.setItem('reportData', reportFormDataString);
-
+        this.setState({visible: false});
         this.reportForm.reset();
     };
     handleCancel = (e) => {

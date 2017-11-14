@@ -2,9 +2,8 @@ import Pool from './pool';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
-
     return {
-        newReportFromSocket:state.appSocketReducer.reportSocket ? state.appSocketReducer.reportSocket : [],
+        reportsData:state.initialReports.oldReports.data ? state.initialReports.oldReports.data : [],
     };
 };
 

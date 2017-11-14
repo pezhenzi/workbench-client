@@ -11,14 +11,16 @@ class App extends Component {
         super(props);
         this.home = io.connect('http://10.10.60.47:3000');
     }
+    componentWillMount(){
+        this.props.getInitialReports();
+    }
     componentDidMount(){
         const that = this;
         this.home.on('new report from others', function(data){
             console.log(data);
             that.props.receiveReportSocket(data);
-            const reportFormDataString = JSON.stringify(data);
-            localStorage.setItem('reportDataFromSocket', reportFormDataString);
         });
+        this.home.emit('app emit test', {msg:`from app.js`});
     }
     render() {
       return (

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Icon } from 'antd';
+import io from 'socket.io-client';
 /*reports数据只要通过props更新即可，
 * 不必在这个子组件中使用state维护reports，
 * 只要在父组件中将props与父组件的state绑定，再更新这个state即可实时渲染这个子组件。*/
@@ -7,11 +8,10 @@ class Pool extends Component{
     constructor(props){
         super(props);
         this.state = {
-        }
+        };
     }
     componentDidMount(){
-        console.log(JSON.parse(localStorage.localReports));
-        console.log(this.props.newReportFromSocket);
+        //
     }
     handleUse(e){
         this.props.onUse(e.target.title); //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
@@ -25,6 +25,8 @@ class Pool extends Component{
 
     componentWillUnmount(){
         //TODO:如何决定是否需要从localStorage恢复数据。
+        //TODO:业务数据应该在数据库与socket之间同步，不要存储到local，否则会增加复杂度。
+        //TODO:localStorage应该只存储用户信息，维持登录状态。以及记录应用的生命周期信息。
     /*当组件被卸载时，在localStorage中改变组件的状态属性 如poolStatus:unmounted,
     * 当组件挂载时，检查localStorage中的status属性，根据其值决定是否要将localStorage中的
     * localReports通过reducer加入到redux的store中。
@@ -32,10 +34,10 @@ class Pool extends Component{
     }
 
     render(){
-        if(this.props.newReportFromSocket){
+        if(this.props.reportsData){
             return (
                 <div>
-                    {this.props.newReportFromSocket.map((item,index) =>
+                    {this.props.reportsData.map((item,index) =>
                         <div className='pool-block' key={index}>
                             <div className="widget-action">
                                 <li title={item.reportId} onClick={this.handleDrop.bind(this)}>Drop</li>
@@ -50,7 +52,7 @@ class Pool extends Component{
                 </div>
             );
         } else{
-            return (<div></div>);
+            return (<div>no data</div>);
         }
 
     }
