@@ -13,9 +13,6 @@ export const logAction = {
 
 export const reportAction = {
     ADD_REPORT:'ADD_REPORT',
-    USE_REPORT:'USE_REPORT',
-    DROP_REPORT:'DROP_REPORT',
-    TOP_REPORT:'TOP_REPORT',
     GET_REPORTS:'GET_REPORTS',
 };
 
@@ -26,4 +23,10 @@ export const cardAction = {
     COMPLETE_CARD:'COMPLETE_CARD',
     HANGUP_CARD:'HANGUP_CARD',
     GET_CARDS:'GET_CARDS',
+};
+
+export const poolAction = {
+    USE_REPORT:'USE_REPORT',
+    DROP_REPORT:'DROP_REPORT',
+    TOP_REPORT:'TOP_REPORT',
 };

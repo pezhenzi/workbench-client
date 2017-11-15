@@ -13,6 +13,7 @@ class App extends Component {
     }
     componentWillMount(){
         this.props.getInitialReports();
+        console.log(this.props.oldReports);
     }
     componentDidMount(){
         const that = this;

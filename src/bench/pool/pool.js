@@ -14,7 +14,7 @@ class Pool extends Component{
         //
     }
     handleUse(e){
-        this.props.onUse(e.target.title); //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
+        this.props.useTargetReport(e.target.title, this.props.reportsData); //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
     }
     handleTop(e){
         this.props.onTop(e.target.title);
