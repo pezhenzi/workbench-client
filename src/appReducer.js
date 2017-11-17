@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {appAction} from './constants/actionType.js';
+import {appAction, poolAction} from './constants/actionType.js';
 import homeReducer from './home/homeReducer';
 import poolReducer from './bench/pool/poolReducer';
 

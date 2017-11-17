@@ -14,11 +14,11 @@ const mapDispatchToProps = (dispatch) => {
         useTargetReport:(id, oldReports) => {
             dispatch(useReport(id, oldReports));
         },
-        topTargetReport:(id) => {
-            dispatch(topReport(id));
+        topTargetReport:(id, oldReports) => {
+            dispatch(topReport(id, oldReports));
         },
-        dropTargetReport:(id) => {
-            dispatch(dropReport(id));
+        dropTargetReport:(id, oldReports) => {
+            dispatch(dropReport(id, oldReports));
         },
     }
 };

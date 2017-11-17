@@ -172,6 +172,8 @@ header h1{
     background-color: #c7ceb2;
     width:79.5%;
     height:550px;
+}
+.cards-board-inner{
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;

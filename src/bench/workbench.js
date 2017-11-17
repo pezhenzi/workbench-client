@@ -5,7 +5,7 @@ import { Menu, Icon, Button, Modal} from 'antd';
 import PoolContainer from './pool/poolContainer';
 import Flow from './pool/flow';
 import Members from './pool/members';
-import Card from './cards/card';
+import CardContainer from './cards/cardContainer';
 import io from 'socket.io-client';
 
 function idGenerator(user,id){
@@ -16,7 +16,6 @@ class Workbench extends Component{
     constructor(props){
         super(props);
         this.state = {
-            cardData:[],
             visible:false,
             reports:[],
             usedId:[],
@@ -25,13 +24,7 @@ class Workbench extends Component{
     }
 
     componentDidMount(){
-        let that = this;
-
-        this.props.testBenchDispatch();
-        this.home.on('news', function(data){
-            //console.log(data);
-        });
-        this.home.emit('from react', {msg:`thi is one message come from react client.`});
+        console.log(this.props.cardsList);
     }
     showModal = () => {
         this.setState({
@@ -187,9 +180,7 @@ class Workbench extends Component{
 
                     {/*处理题目的卡片工作区*/}
                     <div className="cards-board">
-                        {this.state.cardData.map((item,index) => {
-                            return <Card data={item} key={index}/>;
-                        })}
+                        <CardContainer />
                     </div>
                 </div>
                 <Link className="return-home" to="/">返回主页</Link>

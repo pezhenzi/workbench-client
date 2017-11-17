@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
     const name = localStorage.user_name ? localStorage.user_name : state.logReducer.name;
     const account = localStorage.user_account ? localStorage.user_account : state.logReducer.account;
     const role = localStorage.user_role ? localStorage.user_role : state.logReducer.role;
-
+    const cardsList = state.poolReducer.cardsList;
     return {
         title,
         content,
@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
         name:name,
         account:account,
         role:role,
+        cardsList:cardsList,
     }
 };
 

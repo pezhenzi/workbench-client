@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {getInitialReports, receiveReportSocket} from "./appAction";
 
 const mapStateToProps = (state) => {
-    console.log(state.initialReports.oldReports);
     return {
         oldReports:state.initialReports.oldReports,
     }
