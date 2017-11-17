@@ -9,7 +9,7 @@ import AppContainer from './appContainer';
 import rootReducer from './appReducer';
 import registerServiceWorker from './registerServiceWorker';
 
-const middleWare = [thunk, createLogger()];
+const middleWare = [thunk];
 
 const store = createStore(
     rootReducer,

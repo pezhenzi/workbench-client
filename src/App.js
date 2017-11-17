@@ -20,7 +20,16 @@ class App extends Component {
             console.log(data);
             that.props.receiveReportSocket(data);
         });
-        this.home.emit('app emit test', {msg:`from app.js`});
+        this.home.on('use one report', function(data){
+            console.log(data);
+            that.props.useOneReport(data.reportId, that.props.oldReports);
+        });
+        this.home.on('top one report', (data) => {
+            that.props.topOneReport(data.reportId);
+        });
+        this.home.on('drop one report', (data) => {
+            that.props.dropOneReport(data.reportId);
+        });
     }
     render() {
       return (

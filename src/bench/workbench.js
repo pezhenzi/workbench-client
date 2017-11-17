@@ -32,7 +32,7 @@ class Workbench extends Component{
         });
     };
     handleOk = (e) => {
-        const author = localStorage.user_name || this.props.name || `佚名`;
+        const author = localStorage.user_account || this.props.account || `佚名`;
         let reportFormData = {
             title:this.titleInput.value,
             content:this.contentInput.value,
@@ -167,13 +167,7 @@ class Workbench extends Component{
                         </Menu>
                         {/*注意在react-router中向Route要渲染的子组件传递props的方法。*/}
                         <Route path='/bench/pool'
-                               component={() => <PoolContainer
-                                   reports={this.state.reports}
-                                   onUse={this.handleOnUse.bind(this)}
-                                   onTop={this.handleOnTop.bind(this)}
-                                   onDrop={this.handleOnDrop.bind(this)}
-                                   reportSocket={this.props.reportSocket}
-                               />} />
+                               component={PoolContainer} />
                         <Route path='/bench/flow' component={Flow}/>
                         <Route path='/bench/members' component={Members}/>
                     </div>

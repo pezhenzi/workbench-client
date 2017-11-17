@@ -16,6 +16,20 @@ const initialReports = (state={oldReports:[]}, action) => {
                     ...state.oldReports  //注意这里引用oldReports的写法，在container中引用必须要加initialReports!
                 ]
             });
+        case poolAction.TOP_REPORT:
+            const toTopIndex = state.oldReports.findIndex((item) => item.reportId === action.reportId);
+            const toTopReport = state.oldReports[toTopIndex];
+            const afterDrop = [...state.oldReports.slice(0, toTopIndex), ...state.oldReports.slice(toTopIndex + 1)];
+            return {...state, oldReports:[toTopReport, ...afterDrop]};
+        case poolAction.DROP_REPORT:
+            let toDropIndex = state.oldReports.findIndex((item) => item.reportId === action.reportId);
+            return {
+                ...state,
+                oldReports:[
+                    ...state.oldReports.slice(0, toDropIndex),
+                    ...state.oldReports.slice(toDropIndex + 1)
+                ]
+            };
         default:
             return state;
     }

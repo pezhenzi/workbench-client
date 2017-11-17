@@ -17,11 +17,6 @@ const poolReducer = (state={usedReportsIds:[], cardsList:[]}, action) => {
             } else{
                 return state;
             }
-            return state;
-        case poolAction.TOP_REPORT:
-            return state;
-        case poolAction.DROP_REPORT:
-            return state;
         default:
             return state;
     }

@@ -1,6 +1,6 @@
 import Pool from './pool';
 import {connect} from 'react-redux';
-import {useReport, topReport, dropReport} from "./poolAction";
+import {useReport, dropReport, topReport} from "./poolAction";
 
 const mapStateToProps = (state) => {
     console.log(state);
@@ -14,11 +14,11 @@ const mapDispatchToProps = (dispatch) => {
         useTargetReport:(id, oldReports) => {
             dispatch(useReport(id, oldReports));
         },
-        topTargetReport:(id, oldReports) => {
-            dispatch(topReport(id, oldReports));
+        topTargetReport:(id) => {
+            dispatch(topReport(id));
         },
-        dropTargetReport:(id, oldReports) => {
-            dispatch(dropReport(id, oldReports));
+        dropTargetReport:(id) => {
+            dispatch(dropReport(id));
         },
     }
 };

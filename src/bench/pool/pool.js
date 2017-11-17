@@ -9,18 +9,24 @@ class Pool extends Component{
         super(props);
         this.state = {
         };
+        this.home = io.connect('http://10.10.60.47:3000');
     }
     componentDidMount(){
         //
     }
     handleUse(e){
-        this.props.useTargetReport(e.target.title, this.props.reportsData); //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
+        //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
+        this.props.useTargetReport(e.target.title, this.props.reportsData);
+        this.home.emit('use target report', {reportId:e.target.title});
+
     }
     handleTop(e){
-        this.props.onTop(e.target.title);
+        this.props.topTargetReport(e.target.title);
+        this.home.emit('top target report', {reportId:e.target.title});
     }
     handleDrop(e){
-        this.props.onDrop(e.target.title);
+        this.props.dropTargetReport(e.target.title);
+        this.home.emit('drop target report', {reportId:e.target.title});
     }
 
     componentWillUnmount(){
