@@ -59,49 +59,6 @@ class Workbench extends Component{
         });
     };
 
-    //选取目标项目，将其添加到卡片列表中。
-    handleOnUse(id){
-        const usedReports = this.state.reports;
-        let targetReport = usedReports.filter((item) => {
-            //开始这里打算使用find方法，传入id作为参数，报错为id不是函数。
-            //find方法的参数其实是一个函数，指定一个查询条件，不是一个字面量。
-            //所以这里用indexOf方法更合适。
-            //======!!!此处亦可用find或findIndex方法，参见下面的handleOnTop函数。
-            return Object.values(item).indexOf(id) !== -1;
-        });
-        if(this.state.usedId.indexOf(id) === -1){
-            this.setState((prevState, props) => {
-                return {
-                    cardData:[...prevState.cardData, ...targetReport],
-                    usedId:[...prevState.usedId, id],
-                };
-            },()=>{console.log(this.state.cardData)});
-        } else{
-            alert(`This report has used!`);
-        }
-
-    }
-    //将目标项目置顶。注意，这里用数组的findIndex方法找到数组的元素中包含参数id值的那个元素的索引。此方法比filter方法更简洁。
-    handleOnTop(id){
-        let targetReportIndex = this.state.reports.findIndex((item,i) => item.reportId === id);
-        let targetReport = this.state.reports[targetReportIndex];
-        this.setState((prevState) => {
-            prevState.reports.splice(targetReportIndex, 1);
-            return {
-                reports:[targetReport, ...prevState.reports],
-            }
-        }, ()=>{console.log(this.state.reports)})
-    }
-    //从reports列表中删除目标项目
-    handleOnDrop(id){
-        let targetReportIndex = this.state.reports.findIndex((item,i) => item.reportId === id);
-        this.setState((prevState) => {
-            prevState.reports.splice(targetReportIndex, 1);
-            return {
-                reports:[...prevState.reports],
-            }
-        })
-    }
     render(){
         return (
             <div>

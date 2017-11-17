@@ -21,8 +21,8 @@ const mapDispatchToProps = (dispatch) => {
         getToken:(loginData) => {
             dispatch(getToken(loginData));
         },
-        logout:(token) => {
-            dispatch(logout(token));
+        logout:() => {
+            dispatch(logout());
         }
     };
 };

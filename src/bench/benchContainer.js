@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Workbench from './workbench';
-import {addReport} from './actions/reportAction';
+import {getToken, logout} from "../home/logAction";
 
 const mapStateToProps = (state) => {
     const {title, content} = state.report ? state.report : {title:'', content:''};
@@ -22,10 +22,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        testBenchDispatch:() => {
+        getToken:(loginData) => {
+            dispatch(getToken(loginData));
         },
-        testAddReport:(data) => {
-            dispatch(addReport(data));
+        logout:() => {
+            dispatch(logout());
         }
     }
 };

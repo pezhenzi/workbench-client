@@ -17,6 +17,7 @@ class Header extends Component{
         this.props.handleRegister(`register`);
     }
     handleLogout(e){
+        console.log(this.props.token);
         this.props.logout(this.props.token);
     }
 
