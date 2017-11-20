@@ -27,7 +27,7 @@ class Home extends Component{
     handleSubmit(data){
         console.log(data);
     }
-    //TODO:render the component.
+
     render(){
         return (
             <div className="home-container">

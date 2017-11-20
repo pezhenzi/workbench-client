@@ -1,7 +1,6 @@
 //import {combineReducers} from 'redux';
 import {poolAction} from "../../constants/actionType";
 
-//TODO:操作pool，use、top、drop操作。通过redux完成，并广播到socket。
 const poolReducer = (state={usedReportsIds:[], cardsList:[]}, action) => {
     switch(action.type){
         case poolAction.USE_REPORT:

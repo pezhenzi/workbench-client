@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, Route, NavLink} from 'react-router-dom';
 import Header from '../home/header';
+import HeaderContainer from '../home/headerContainer';
 import { Menu, Icon, Button, Modal} from 'antd';
 import PoolContainer from './pool/poolContainer';
 import Flow from './pool/flow';

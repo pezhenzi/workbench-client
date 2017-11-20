@@ -4,10 +4,10 @@ import {getToken, logout} from "../home/logAction";
 
 const mapStateToProps = (state) => {
     const {title, content} = state.report ? state.report : {title:'', content:''};
-    const token = localStorage.user_token ? localStorage.user_token : state.logReducer.token;
-    const name = localStorage.user_name ? localStorage.user_name : state.logReducer.name;
-    const account = localStorage.user_account ? localStorage.user_account : state.logReducer.account;
-    const role = localStorage.user_role ? localStorage.user_role : state.logReducer.role;
+    const token = localStorage.user_token ? localStorage.user_token : state.homeReducer.logReducer.token;
+    const name = localStorage.user_name ? localStorage.user_name : state.homeReducer.logReducer.name;
+    const account = localStorage.user_account ? localStorage.user_account : state.homeReducer.logReducer.account;
+    const role = localStorage.user_role ? localStorage.user_role : state.homeReducer.logReducer.role;
     const cardsList = state.poolReducer.cardsList;
     return {
         title,
