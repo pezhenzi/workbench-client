@@ -8,7 +8,7 @@ class Flow extends Component{
 
     render(){
         return (
-            <div>
+            <div style={{display:this.props.display}}>
                 <div className='flow-block'>
                     <div><time>{new Date().toLocaleTimeString()}</time></div>
                     <div><i>some member</i> do something,this is a recorder.</div>

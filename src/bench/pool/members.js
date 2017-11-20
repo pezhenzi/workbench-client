@@ -12,26 +12,28 @@ class Members extends Component{
 
     render(){
         return (
-            <div className='members-container'>
-                <div className="member-block">
-                    <div><img src={member1} alt=""/></div>
-                    <div><i>甄泽</i></div>
-                </div>
-                <div className="member-block">
-                    <div><img src={member2} alt=""/></div>
-                    <div><i>梁克</i></div>
-                </div>
-                <div className="member-block">
-                    <div><img src={member3} alt=""/></div>
-                    <div><i>蓝莓</i></div>
-                </div>
-                <div className="member-block">
-                    <div><img src={member4} alt=""/></div>
-                    <div><i>蔡佳</i></div>
-                </div>
-                <div className="member-block">
-                    <div><img style={{borderColor:'#eee'}} src={member1} alt=""/></div>
-                    <div><i>黄振</i></div>
+            <div style={{display:this.props.display}}>
+                <div  className='members-container'>
+                    <div className="member-block">
+                        <div><img src={member1} alt=""/></div>
+                        <div><i>甄泽</i></div>
+                    </div>
+                    <div className="member-block">
+                        <div><img src={member2} alt=""/></div>
+                        <div><i>梁克</i></div>
+                    </div>
+                    <div className="member-block">
+                        <div><img src={member3} alt=""/></div>
+                        <div><i>蓝莓</i></div>
+                    </div>
+                    <div className="member-block">
+                        <div><img src={member4} alt=""/></div>
+                        <div><i>蔡佳</i></div>
+                    </div>
+                    <div className="member-block">
+                        <div><img style={{borderColor:'#eee'}} src={member1} alt=""/></div>
+                        <div><i>黄振</i></div>
+                    </div>
                 </div>
             </div>
         )

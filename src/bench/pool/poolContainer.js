@@ -1,6 +1,6 @@
 import Pool from './pool';
 import {connect} from 'react-redux';
-import {useReport, dropReport, topReport} from "./poolAction";
+import {useReport, dropReport, topReport, showEditorCreateModal} from "./poolAction";
 
 const mapStateToProps = (state) => {
     console.log(state);
@@ -19,6 +19,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         dropTargetReport:(id) => {
             dispatch(dropReport(id));
+        },
+        showEditorCreate:() => {
+            dispatch(showEditorCreateModal());
         },
     }
 };

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Icon } from 'antd';
+import {Icon, Button, Modal} from 'antd';
 import io from 'socket.io-client';
 /*reports数据只要通过props更新即可，
 * 不必在这个子组件中使用state维护reports，
@@ -16,6 +16,7 @@ class Pool extends Component{
     }
     handleUse(e){
         //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
+        this.props.showEditorCreate();
         this.props.useTargetReport(e.target.title, this.props.reportsData);
         this.home.emit('use target report', {reportId:e.target.title});
     }
@@ -31,7 +32,7 @@ class Pool extends Component{
     render(){
         if(this.props.reportsData){
             return (
-                <div>
+                <div style={{display:this.props.display}}>
                     {this.props.reportsData.map((item,index) =>
                         <div className='pool-block' key={index}>
                             <div className="widget-action">

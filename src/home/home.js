@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
-import Header from './header';
+import HeaderContainer from './headerContainer';
 import bench_png from '../img/workbench.png';
 import msg_png from '../img/messages.png';
 import arch_png from '../img/archive.png';
@@ -18,15 +18,6 @@ class Home extends Component{
     componentDidMount(){
         //console.log(this.props.test);
     }
-    handleLogin(data){
-        console.log(data);
-    }
-    handleRegister(data){
-        console.log(data);
-    }
-    handleSubmit(data){
-        console.log(data);
-    }
 
     render(){
         return (
@@ -40,15 +31,7 @@ class Home extends Component{
                         <Route path='/register' component={() => <Register handleSubmit={this.handleSubmit}/>}/>
                         <Route path='/' render={()=>this.props.token ? (
                             <div className="home-main">
-                                <Header
-                                    handleLogin={this.handleLogin}
-                                    handleRegister={this.handleRegister}
-                                    name={this.props.name}
-                                    account={this.props.account}
-                                    token={this.props.token}
-                                    role={this.props.role}
-                                    logout={this.props.logout}
-                                />
+                                <HeaderContainer />
                                 <div className="doors-container">
                                     <NavLink to='/bench' className='home-door'>
                                         <div>
@@ -80,15 +63,7 @@ class Home extends Component{
                                 </div>
                             </div>
                         ) : (<div>
-                            <Header
-                                handleLogin={this.handleLogin}
-                                handleRegister={this.handleRegister}
-                                name={this.props.name}
-                                account={this.props.account}
-                                token={this.props.token}
-                                role={this.props.role}
-                                logout={this.props.logout}
-                            />
+                            <HeaderContainer />
                             <h1>请先登录，如果还没有账号请先注册。</h1></div>)} />
                     </Switch>
                 </Router>

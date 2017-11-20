@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link, Route, NavLink} from 'react-router-dom';
-import Header from '../home/header';
 import HeaderContainer from '../home/headerContainer';
 import { Menu, Icon, Button, Modal} from 'antd';
 import PoolContainer from './pool/poolContainer';
@@ -17,9 +16,12 @@ class Workbench extends Component{
     constructor(props){
         super(props);
         this.state = {
-            visible:false,
+            reportModalVisible:false,
             reports:[],
             usedId:[],
+            poolDisplay:'block',
+            flowDisplay:'none',
+            membersDisplay:'none',
         };
         this.home = io.connect('http://10.10.60.47:3000');  //在constructor中声明属性，要加this.
     }
@@ -29,7 +31,7 @@ class Workbench extends Component{
     }
     showModal = () => {
         this.setState({
-            visible: true,
+            reportModalVisible: true,
         });
     };
     handleOk = (e) => {
@@ -42,12 +44,12 @@ class Workbench extends Component{
             status:'new',
         };
         this.home.emit('add report', reportFormData);
-        this.setState({visible: false});
+        this.setState({reportModalVisible: false});
         this.reportForm.reset();
     };
     handleCancel = (e) => {
         this.setState({
-            visible: false,
+            reportModalVisible: false,
         });
         this.reportForm.reset();
     };
@@ -59,19 +61,29 @@ class Workbench extends Component{
             [name]:value,
         });
     };
-
+    handleMenuClick(e){
+        console.log(e.key);
+        if(e.key === 'pool'){
+            this.setState({poolDisplay:'block', flowDisplay:'none', membersDisplay:'none'});
+        } else if(e.key === 'flow'){
+            this.setState({flowDisplay:'block', poolDisplay:'none', membersDisplay:'none'});
+        } else if(e.key === 'members'){
+            this.setState({membersDisplay:'block', flowDisplay:'none', poolDisplay:'none'});
+        }
+    }
+    handleEditorOk(e){
+        this.props.hiddenEditorCreateModal();
+        //this.reportForm.reset();
+    }
+    handleEditorCancel(e){
+        this.props.hiddenEditorCreateModal();
+        //this.reportForm.reset();
+    }
+    //TODO:新建卡片时，责编编辑内容；卡片active时，其他人添加资料或附件；文章编辑和上传；责编控制项目进度。
     render(){
         return (
             <div>
-                <Header
-                    handleLogin={this.handleLogin}
-                    handleRegister={this.handleRegister}
-                    name={this.props.name}
-                    account={this.props.account}
-                    token={this.props.token}
-                    role={this.props.role}
-                    logout={this.props.logout}
-                />
+                <HeaderContainer />
                 <div className="header-btn-group">
                     <Button ghost onClick={this.showModal}>我要报题</Button>
                     <Button ghost>归档区</Button>
@@ -81,9 +93,10 @@ class Workbench extends Component{
                 {/*用户填写报题信息的对话框*/}
                 <Modal
                     title="填写详细报题信息"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
+                    visible={this.state.reportModalVisible}
+                    onOk={this.handleOk.bind(this)}
+                    onCancel={this.handleCancel.bind(this)}
+                    closable={false}
                     className='report-modal'
                     width='50%'
                 >
@@ -108,26 +121,37 @@ class Workbench extends Component{
                         </form>
                     </div>
                 </Modal>
+                <Modal
+                    title="责编填写卡片基本信息"
+                    visible={this.props.editorCreateModalVisible}
+                    onOk={this.handleEditorOk.bind(this)}
+                    onCancel={this.handleEditorCancel.bind(this)}
+                    closable={false}
+                    className='editor-modal'
+                    width='50%'
+                >
+                    <h3>责编创建卡片，并完善信息。</h3>
+                </Modal>
 
                 <div className="bench-main">
                     {/*选题池、操作流和成员列表*/}
                     <div className="pool-container">
-                        <Menu mode="horizontal">
-                            <Menu.Item key="mail">
-                                <NavLink to='/bench/pool'><Icon type="database" />pool</NavLink>
+                        <Menu mode="horizontal" defaultSelectedKeys={['pool']} onClick={this.handleMenuClick.bind(this)}>
+                            <Menu.Item key="pool">
+                                <li><Icon type="database" />pool</li>
                             </Menu.Item>
-                            <Menu.Item key="app">
-                                <NavLink to='/bench/flow'><Icon type="flag" />flow</NavLink>
+                            <Menu.Item key="flow">
+                                <li><Icon type="flag" />flow</li>
                             </Menu.Item>
-                            <Menu.Item key="user">
-                                <NavLink to='/bench/members'><Icon type="user" />members</NavLink>
+                            <Menu.Item key="members">
+                                <li><Icon type="user" />members</li>
                             </Menu.Item>
                         </Menu>
-                        {/*注意在react-router中向Route要渲染的子组件传递props的方法。*/}
-                        <Route path='/bench/pool'
-                               component={PoolContainer} />
-                        <Route path='/bench/flow' component={Flow}/>
-                        <Route path='/bench/members' component={Members}/>
+                        {/*注意在react-router中向Route要渲染的子组件传递props的方法。render一个函数并返回带props的组件*/}
+                        <PoolContainer display={this.state.poolDisplay} />
+                        <Flow display={this.state.flowDisplay} />
+                        <Members display={this.state.membersDisplay}/>
+
                     </div>
 
                     {/*处理题目的卡片工作区*/}

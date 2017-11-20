@@ -1,5 +1,5 @@
 //import {combineReducers} from 'redux';
-import {poolAction} from "../../constants/actionType";
+import {poolAction, UIAction} from "../../constants/actionType";
 
 const poolReducer = (state={usedReportsIds:[], cardsList:[]}, action) => {
     switch(action.type){

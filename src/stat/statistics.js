@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import Header from '../home/header';
+import HeaderContainer from '../home/headerContainer';
 
 class Statistics extends Component{
     constructor(props){
@@ -10,7 +10,7 @@ class Statistics extends Component{
     render(){
         return (
             <div>
-                <Header/>
+                <HeaderContainer/>
                 <h1>this is workbench</h1>
                 <Link className="return-home" to="/">Go Back</Link>
             </div>
