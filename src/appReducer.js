@@ -3,6 +3,7 @@ import {appAction, poolAction} from './constants/actionType.js';
 import homeReducer from './home/homeReducer';
 import poolReducer from './bench/pool/poolReducer';
 import UIReducer from './UIReducer';
+import cardReducer from './bench/cards/cardReducer';
 
 const initialReports = (state={oldReports:[]}, action) => {
     switch(action.type){
@@ -41,5 +42,6 @@ const rootReducer = combineReducers({
     homeReducer,
     poolReducer,
     UIReducer,
+    cardReducer,
 });
 export default rootReducer;

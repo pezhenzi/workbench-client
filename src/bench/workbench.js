@@ -73,6 +73,14 @@ class Workbench extends Component{
     }
     handleEditorOk(e){
         this.props.hiddenEditorCreateModal();
+        //TODO:处理card表单
+        let formData = new FormData();
+        formData.append('cardData', 'some data');
+        fetch('http://10.10.60.47:3000/card/save-card', {
+            method:post,
+            body:formData,
+            mode:'cors',
+        }).then((response) => response.json()).then((response) => console.log(response));
         //this.reportForm.reset();
     }
     handleEditorCancel(e){
@@ -131,6 +139,26 @@ class Workbench extends Component{
                     width='50%'
                 >
                     <h3>责编创建卡片，并完善信息。</h3>
+                    <div className="report-from-wrap">
+                        <form ref={(form) => this.cardForm = form}>
+                            <div className='report-modal-input-wrap'>
+                                <div className='report-modal-input-label'><p>标题</p></div>
+                                <div className="report-modal-input">
+                                    <input type="text" name='title' required
+                                           ref={(input) => this.cardTitleInput = input}
+                                    />
+                                </div>
+                            </div>
+                            <div className='report-modal-input-wrap'>
+                                <div className='report-modal-input-label'><p>内容</p></div>
+                                <div className="form-group report-modal-input">
+                                    <textarea rows="8" required name='content'
+                                              ref={(textarea) => this.contentInput = textarea}
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </Modal>
 
                 <div className="bench-main">

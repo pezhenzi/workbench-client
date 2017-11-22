@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
         role:role,
         cardsList:cardsList,
         editorCreateModalVisible:editorCreateModalVisible,
+        reportsList:state.initialReports.oldReports,
     }
 };
 
