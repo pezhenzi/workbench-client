@@ -29,6 +29,7 @@ export const poolAction = {
     USE_REPORT:'USE_REPORT',
     DROP_REPORT:'DROP_REPORT',
     TOP_REPORT:'TOP_REPORT',
+    CURRENT_REPORT:'CURRENT_REPORT',
 };
 
 export const UIAction = {

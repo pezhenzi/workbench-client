@@ -9,7 +9,13 @@ const cardReducer = (state={cardsList:[], completedCards:[], droppedCards:[], ha
             backList = state.cardsList.slice(cardIndex+1);
             return {...state, cardsList:[...frontList, ...backList]};
         case cardAction.ADD_CARD:
-            return {...state, cardsList:[...action.data, ...state.cardsList]};
+            //无论初始化数据还是本地add或socket add数据，都可以用这个reducer
+            //这是应该做到的，如果有问题须想办法解决。
+            if(Object.prototype.toString.call(action.cardData) === '[object Array]'){
+                return {...state, cardsList:[...action.data, ...state.cardsList]};
+            } else{
+                return {...state, cardsList:[action.data, ...state.cardsList]};
+            }
         case cardAction.COMPLETE_CARD:
             //完成卡片，项目正常结束。
             cardIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);

@@ -5,7 +5,7 @@ import poolReducer from './bench/pool/poolReducer';
 import UIReducer from './UIReducer';
 import cardReducer from './bench/cards/cardReducer';
 
-const initialReports = (state={oldReports:[]}, action) => {
+const initialReports = (state={oldReports:[], currentReport:{}}, action) => {
     switch(action.type){
         case appAction.INITIAL_REPORTS:
             //反复出错是因为，socket接收的数据结构是{data:[{item}]},数组外面多了一个data，
@@ -32,6 +32,10 @@ const initialReports = (state={oldReports:[]}, action) => {
                     ...state.oldReports.slice(toDropIndex + 1)
                 ]
             };
+        case poolAction.CURRENT_REPORT:
+            const currentIndex = state.oldReports.findIndex((item) => item.reportId === action.reportId);
+            const currentReport = state.oldReports[currentIndex];
+            return {...state, currentReport:currentReport};
         default:
             return state;
     }

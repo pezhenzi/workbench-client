@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import Workbench from './workbench';
 import {getToken, logout} from "../home/logAction";
 import {hiddenEditorCreateModal} from "./pool/poolAction";
+import {addCard} from "./cards/cardAction";
 
 const mapStateToProps = (state) => {
     const {title, content} = state.report ? state.report : {title:'', content:''};
@@ -11,6 +12,7 @@ const mapStateToProps = (state) => {
     const role = localStorage.user_role ? localStorage.user_role : state.homeReducer.logReducer.role;
     const cardsList = state.poolReducer.cardsList;
     const editorCreateModalVisible = state.UIReducer.editorCreateModalVisible || false;
+    const currentReport = state.initialReports.currentReport;
     return {
         title,
         content,
@@ -20,7 +22,7 @@ const mapStateToProps = (state) => {
         role:role,
         cardsList:cardsList,
         editorCreateModalVisible:editorCreateModalVisible,
-        reportsList:state.initialReports.oldReports,
+        currentReport:currentReport,
     }
 };
 
@@ -35,7 +37,10 @@ const mapDispatchToProps = (dispatch) => {
         hiddenEditorCreateModal:() => {
             console.log('action was dispatched!');
             dispatch(hiddenEditorCreateModal());
-        }
+        },
+        addNewCard:(data) => {
+            dispatch(addCard(data));
+        },
     }
 };
 

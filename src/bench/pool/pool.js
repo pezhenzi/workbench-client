@@ -18,6 +18,7 @@ class Pool extends Component{
         //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
         this.props.showEditorCreate();
         this.props.useTargetReport(e.target.title, this.props.reportsData);
+        this.peops.getCurrentReport(e.target.reportId);
         this.home.emit('use target report', {reportId:e.target.title});
     }
     handleTop(e){

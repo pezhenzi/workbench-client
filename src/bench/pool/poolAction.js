@@ -1,5 +1,10 @@
 import {poolAction, UIAction} from "../../constants/actionType";
 
+export const currentReport = (id) => ({
+    type:poolAction.CURRENT_REPORT,
+    reportId:id,
+});
+
 export const useReport = (id, oldReports) => ({
     type:poolAction.USE_REPORT,
     reportId:id,

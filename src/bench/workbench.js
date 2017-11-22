@@ -74,21 +74,32 @@ class Workbench extends Component{
     handleEditorOk(e){
         this.props.hiddenEditorCreateModal();
         //TODO:处理card表单
+        const cardId = idGenerator(this.props.account);
         let formData = new FormData();
-        formData.append('cardData', 'some data');
+        formData.append('cardId', cardId);
+        formData.append('title', this.cardTitleInput.value);
+        formData.append('content', this.cardContentInput.value);
+        formData.append('author', this.props.currentReport.author);
+        formData.append('editor', this.props.name);
+        formData.append('editorIdea', this.cardIdeaInput.value);
+        formData.append('journalist', this.inviteInput.value);
+        formData.append('createTime', Date.now());
         fetch('http://10.10.60.47:3000/card/save-card', {
             method:post,
             body:formData,
             mode:'cors',
         }).then((response) => response.json()).then((response) => console.log(response));
-        //this.reportForm.reset();
+        this.props.addNewCard(formData);
+        this.home.emit('add new card', {cardData:formData});
+        this.cardForm.reset();
     }
     handleEditorCancel(e){
         this.props.hiddenEditorCreateModal();
-        //this.reportForm.reset();
+        this.cardForm.reset();
     }
     //TODO:新建卡片时，责编编辑内容；卡片active时，其他人添加资料或附件；文章编辑和上传；责编控制项目进度。
     render(){
+        const currentReport = this.props.currentReport;
         return (
             <div>
                 <HeaderContainer />
@@ -144,17 +155,46 @@ class Workbench extends Component{
                             <div className='report-modal-input-wrap'>
                                 <div className='report-modal-input-label'><p>标题</p></div>
                                 <div className="report-modal-input">
-                                    <input type="text" name='title' required
+                                    <input type="text" required
                                            ref={(input) => this.cardTitleInput = input}
+                                           value={currentReport.title}
                                     />
                                 </div>
                             </div>
                             <div className='report-modal-input-wrap'>
                                 <div className='report-modal-input-label'><p>内容</p></div>
                                 <div className="form-group report-modal-input">
-                                    <textarea rows="8" required name='content'
-                                              ref={(textarea) => this.contentInput = textarea}
+                                    <textarea rows="8" required
+                                              ref={(textarea) => this.cardContentInput = textarea}
+                                              value={currentReport.content}
                                     />
+                                </div>
+                            </div>
+                            <div className='report-modal-input-wrap'>
+                                <div className='report-modal-input-label'><p>报题人</p></div>
+                                <div className="report-modal-input">
+                                    <p>{currentReport.author}</p>
+                                </div>
+                            </div>
+                            <div className='report-modal-input-wrap'>
+                                <div className='report-modal-input-label'><p>项目要求</p></div>
+                                <div className="form-group report-modal-input">
+                                    <textarea rows="8" required
+                                              ref={(textarea) => this.cardIdeaInput = textarea}
+                                              placeholder='填写关于该选题的思路、要求、目标等内容。'
+                                    />
+                                </div>
+                            </div>
+                            <div className='report-modal-input-wrap'>
+                                <div className='report-modal-input-label'><p>邀请记者</p></div>
+                                <div className="report-modal-input">
+                                    <select required ref={(input) => this.inviteInput = input} multiple={true}>
+                                        <option value="attention">后面要从成员列表中读取数据并循环渲染</option>
+                                        <option value="admin">李白</option>
+                                        <option value="editor">杜甫</option>
+                                        <option selected value="journalist">白居易</option>
+                                        <option value="reporter">孟浩然</option>
+                                    </select>
                                 </div>
                             </div>
                         </form>

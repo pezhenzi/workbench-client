@@ -13,6 +13,7 @@ class App extends Component {
     }
     componentWillMount(){
         this.props.getInitialReports();
+        this.props.getInitialCards();
     }
     componentDidMount(){
         const that = this;
@@ -30,6 +31,9 @@ class App extends Component {
         this.home.on('drop one report', (data) => {
             that.props.dropOneReport(data.reportId);
         });
+        this.home.on('add one card', (data) => {
+            that.props.addNewCard(data);
+        })
     }
     render() {
       return (

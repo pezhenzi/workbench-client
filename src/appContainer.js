@@ -2,6 +2,7 @@ import App from './App';
 import {connect} from 'react-redux';
 import {getInitialReports, receiveReportSocket} from "./appAction";
 import {useReport, topReport, dropReport} from "./bench/pool/poolAction";
+import {getInitialCards} from "./bench/cards/cardAction";
 
 const mapStateToProps = (state) => {
     return {
@@ -17,7 +18,10 @@ const mapDispatchToProps = (dispatch) => {
         getInitialReports:() => {
             dispatch(getInitialReports());
         },
-        //以下三个方法处理socket操错。
+        getInitialCards:() => {
+            dispatch(getInitialCards());
+        },
+        //以下三个方法处理socket操作。
         useOneReport:(id, oldReports) => {
             dispatch(useReport(id, oldReports));
         },
