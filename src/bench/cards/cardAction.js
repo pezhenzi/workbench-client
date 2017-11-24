@@ -35,6 +35,6 @@ export const getInitialCards = () => {
     return (dispatch) => {
         return fetch('http://10.10.60.47:3000/card/get-cards')
             .then((response) => response.json())
-            .then((response) => dispatch(addCard(response)));
+            .then((response) => dispatch(addCard(response.data.reverse())));
     };
 };

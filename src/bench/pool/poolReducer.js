@@ -2,22 +2,8 @@
 import {poolAction, UIAction} from "../../constants/actionType";
 import {addCard} from "../cards/cardAction";
 
-const poolReducer = (state={usedReportsIds:[]}, action) => {
+const poolReducer = (state={}, action) => {
     switch(action.type){
-        case poolAction.USE_REPORT:
-            console.log(action.oldReports); //现在的做法是把oldReports从pool以action参数的形式传过来。
-            let targetReport = action.oldReports.filter((item) => {
-                return Object.values(item).indexOf(action.reportId) !== -1;
-            });
-            //应该把cards数据集中到一个cardReducer处理。此处dispatch一个action，通知修改state即可。
-            if(state.usedReportsIds.indexOf(action.reportId) === -1){
-                dispatch(addCard(action.reportId));
-                return {...state,
-                        usedReportsIds:[...state.usedReportsIds, action.reportId],
-                    };
-            } else{
-                return state;
-            }
         default:
             return state;
     }

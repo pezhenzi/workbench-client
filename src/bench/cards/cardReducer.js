@@ -4,33 +4,32 @@ import {cardAction} from "../../constants/actionType";
 const cardReducer = (state={cardsList:[], completedCards:[], droppedCards:[], hangedCards:[]}, action) => {
     switch(action.type){
         case cardAction.DROP_CARD:
-            cardIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            frontList = state.cardsList.slice(0, cardIndex);
-            backList = state.cardsList.slice(cardIndex+1);
+            const cardIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            const frontList = state.cardsList.slice(0, cardIndex);
+            const backList = state.cardsList.slice(cardIndex+1);
             return {...state, cardsList:[...frontList, ...backList]};
         case cardAction.ADD_CARD:
-            //无论初始化数据还是本地add或socket add数据，都可以用这个reducer
-            //这是应该做到的，如果有问题须想办法解决。
-            if(Object.prototype.toString.call(action.cardData) === '[object Array]'){
-                return {...state, cardsList:[...action.data, ...state.cardsList]};
+            //注意，数据在前后端传递时的格式，务必一致，经常在这里出问题！
+            if(Object.prototype.toString.call(action.cardData) === '[object Array]'){ //判断变量为数组的标准方法
+                return {...state, cardsList:[...action.cardData, ...state.cardsList]};
             } else{
-                return {...state, cardsList:[action.data, ...state.cardsList]};
+                return {...state, cardsList:[action.cardData, ...state.cardsList]};
             }
         case cardAction.COMPLETE_CARD:
             //完成卡片，项目正常结束。
-            cardIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            willComplete = state.cardsList[cardIndex];
+            const completeIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            const willComplete = state.cardsList[completeIndex];
             return {...state, completedCards:[willComplete, ...state.completedCards]};
         case cardAction.TOP_CARD:
             //将卡片置于卡片区域的最左侧
-            cardIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            willTop = state.cardsList[cardIndex];
-            frontList = state.cardsList.slice(0, cardIndex);
-            backList = state.cardsList.slice(cardIndex+1);
-            return {...state, cardsList:[willTop, ...frontList, ...backList]};
+            const topIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            const willTop = state.cardsList[topIndex];
+            const topFrontList = state.cardsList.slice(0, cardIndex);
+            const topBackList = state.cardsList.slice(cardIndex+1);
+            return {...state, cardsList:[willTop, ...topFrontList, ...topBackList]};
         case cardAction.HANGUP_CARD:
-            cardIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            willHanged = state.cardsList[cardIndex];
+            const hangIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            const willHanged = state.cardsList[hangIndex];
             return {...state, hangedCards:[willHanged, ...state.hangedCards]};
             //选题未按时完结，需要延后交稿和发布。
             return state;

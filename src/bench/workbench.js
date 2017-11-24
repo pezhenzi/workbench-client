@@ -27,7 +27,7 @@ class Workbench extends Component{
     }
 
     componentDidMount(){
-        console.log(this.props.cardsList);
+        //
     }
     showModal = () => {
         this.setState({
@@ -62,7 +62,6 @@ class Workbench extends Component{
         });
     };
     handleMenuClick(e){
-        console.log(e.key);
         if(e.key === 'pool'){
             this.setState({poolDisplay:'block', flowDisplay:'none', membersDisplay:'none'});
         } else if(e.key === 'flow'){
@@ -73,24 +72,37 @@ class Workbench extends Component{
     }
     handleEditorOk(e){
         this.props.hiddenEditorCreateModal();
-        //TODO:处理card表单
         const cardId = idGenerator(this.props.account);
+        const cardFormData = {
+            cardId:cardId,
+            reportId:this.props.currentReport.reportId,
+            title:this.cardTitleInput.value,
+            content:this.cardContentInput.value,
+            author:this.props.currentReport.author,
+            editor:this.props.name,
+            editorIdea:this.cardIdeaInput.value,
+            journalist:this.inviteInput.value,
+            createTime:Date.now(),
+        };
         let formData = new FormData();
         formData.append('cardId', cardId);
-        formData.append('title', this.cardTitleInput.value);
-        formData.append('content', this.cardContentInput.value);
-        formData.append('author', this.props.currentReport.author);
-        formData.append('editor', this.props.name);
-        formData.append('editorIdea', this.cardIdeaInput.value);
-        formData.append('journalist', this.inviteInput.value);
-        formData.append('createTime', Date.now());
+        formData.append('reportId', cardFormData.reportId);
+        formData.append('title',cardFormData.title);
+        formData.append('content', cardFormData.content);
+        formData.append('author', cardFormData.author);
+        formData.append('editor', cardFormData.editor);
+        formData.append('editorIdea', cardFormData.editorIdea);
+        formData.append('journalist', cardFormData.journalist);
+        formData.append('createTime', cardFormData.createTime);
         fetch('http://10.10.60.47:3000/card/save-card', {
-            method:post,
+            method:'post',
             body:formData,
             mode:'cors',
-        }).then((response) => response.json()).then((response) => console.log(response));
-        this.props.addNewCard(formData);
-        this.home.emit('add new card', {cardData:formData});
+        })
+            .then((response) => response.json())
+            .then((response) => console.log(response));
+        this.props.addNewCard(cardFormData);
+        this.home.emit('add new card', {cardData:cardFormData, account:this.props.account});
         this.cardForm.reset();
     }
     handleEditorCancel(e){
@@ -100,6 +112,7 @@ class Workbench extends Component{
     //TODO:新建卡片时，责编编辑内容；卡片active时，其他人添加资料或附件；文章编辑和上传；责编控制项目进度。
     render(){
         const currentReport = this.props.currentReport;
+        console.log(currentReport);
         return (
             <div>
                 <HeaderContainer />

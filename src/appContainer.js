@@ -2,11 +2,13 @@ import App from './App';
 import {connect} from 'react-redux';
 import {getInitialReports, receiveReportSocket} from "./appAction";
 import {useReport, topReport, dropReport} from "./bench/pool/poolAction";
-import {getInitialCards} from "./bench/cards/cardAction";
+import {getInitialCards, addCard} from "./bench/cards/cardAction";
 
 const mapStateToProps = (state) => {
+    const account = localStorage.user_account ? localStorage.user_account : state.homeReducer.logReducer.account;
     return {
         oldReports:state.initialReports.oldReports,
+        account:account,
     }
 };
 
@@ -21,7 +23,6 @@ const mapDispatchToProps = (dispatch) => {
         getInitialCards:() => {
             dispatch(getInitialCards());
         },
-        //以下三个方法处理socket操作。
         useOneReport:(id, oldReports) => {
             dispatch(useReport(id, oldReports));
         },
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         dropOneReport:(id) => {
             dispatch(dropReport(id));
+        },
+        addOneCard:(data) => {
+            dispatch(addCard(data));
         },
     }
 };

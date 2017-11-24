@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import Card from './card';
 
 const mapStateToProps = (state) => {
-    let cardsList = state.poolReducer.cardsList;
+    let cardsList = state.cardReducer.cardsList;
     return {
         cardsList:cardsList,
     }

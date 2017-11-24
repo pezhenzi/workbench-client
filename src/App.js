@@ -32,8 +32,10 @@ class App extends Component {
             that.props.dropOneReport(data.reportId);
         });
         this.home.on('add one card', (data) => {
-            that.props.addNewCard(data);
-        })
+            if(data.account !== this.props.account){
+                that.props.addOneCard(data.cardData);
+            }
+        });
     }
     render() {
       return (

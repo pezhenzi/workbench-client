@@ -3,17 +3,15 @@ import {connect} from 'react-redux';
 import {useReport, dropReport, topReport, showEditorCreateModal, currentReport} from "./poolAction";
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    const cardsList = state.cardReducer.cardsList;
     return {
         reportsData:state.initialReports.oldReports ? state.initialReports.oldReports : [],
+        cardsList:cardsList,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        useTargetReport:(id, oldReports) => {
-            dispatch(useReport(id, oldReports));
-        },
         topTargetReport:(id) => {
             dispatch(topReport(id));
         },

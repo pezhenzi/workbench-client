@@ -16,10 +16,20 @@ class Pool extends Component{
     }
     handleUse(e){
         //用原生的DOM元素，不能自定义特性，这里使用通用的title来标记每个按钮的id。
-        this.props.showEditorCreate();
-        this.props.useTargetReport(e.target.title, this.props.reportsData);
-        this.peops.getCurrentReport(e.target.reportId);
-        this.home.emit('use target report', {reportId:e.target.title});
+        const {cardsList} = this.props;
+        const value = cardsList.findIndex((item) => item.reportId === e.target.title);
+        console.log(value);
+        if(cardsList.length === 0){
+            this.props.showEditorCreate();
+            this.props.getCurrentReport(e.target.title);
+            this.home.emit('use target report', {reportId:e.target.title});
+        } else if(cardsList.length > 0 && value === -1){
+            this.props.showEditorCreate();
+            this.props.getCurrentReport(e.target.title);
+            this.home.emit('use target report', {reportId:e.target.title});
+        } else{
+            alert(`该报题以被置入选题列表，不能重复操作。`);
+        }
     }
     handleTop(e){
         this.props.topTargetReport(e.target.title);
