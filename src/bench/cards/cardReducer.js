@@ -1,7 +1,12 @@
 //import {combineReducers} from 'redux';
 import {cardAction} from "../../constants/actionType";
 
-const cardReducer = (state={cardsList:[], completedCards:[], droppedCards:[], hangedCards:[]}, action) => {
+const cardReducer = (state={
+    cardsList:[],
+    completedCards:[],
+    droppedCards:[],
+    hangedCards:[],
+    currentCard:{}}, action) => {
     switch(action.type){
         case cardAction.DROP_CARD:
             const cardIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
@@ -33,6 +38,53 @@ const cardReducer = (state={cardsList:[], completedCards:[], droppedCards:[], ha
             return {...state, hangedCards:[willHanged, ...state.hangedCards]};
             //选题未按时完结，需要延后交稿和发布。
             return state;
+        case cardAction.CURRENT_CARD:
+            return {...state, currentCard:action.cardData};
+        case cardAction.ADD_DOCUMENT:
+            const documentIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            if(documentIndex){
+                const documentCardsList = state.cardsList;
+                documentCardsList[documentIndex].document = action.document;
+                return {...state, cardsList:[...documentCardsList]};
+            } else{
+                return state;
+            }
+        case cardAction.ADD_MEMBERS:
+            const membersIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            if(membersIndex){
+                const membersCardsList = state.cardsList;
+                membersCardsList[membersIndex].members = action.members;
+                return {...state, cardsList:[...membersCardsList]};
+            } else{
+                return state;
+            }
+        case cardAction.ADD_COMMENT:
+            const commentIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            if(commentIndex){
+                const commentCardsList = state.cardsList;
+                commentCardsList[commentIndex].comment = action.comment;
+                return {...state, cardsList:[...commentCardsList]};
+            } else{
+                return state;
+            }
+        case cardAction.ADD_ARTICLE:
+            const articleIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            if(articleIndex){
+                const articleCardsList = state.cardsList;
+                articleCardsList[articleIndex].article = action.article;
+                return {...state, cardsList:[...articleCardsList]};
+            } else{
+                return state;
+            }
+        case cardAction.ADD_ACCESSORY:
+            const accessoryIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
+            if(accessoryIndex){
+                const accessoryCardsList = state.cardsList;
+                accessoryCardsList[accessoryIndex].accessory = action.accessory;
+                return {...state, cardsList:[...accessoryCardsList]};
+            } else{
+                return state;
+            }
         default:
             return state;
     }

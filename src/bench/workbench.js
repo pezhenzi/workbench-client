@@ -120,6 +120,7 @@ class Workbench extends Component{
                     <Button ghost onClick={this.showModal}>我要报题</Button>
                     <Button ghost>归档区</Button>
                     <Button ghost>拖延区</Button>
+                    <Link to="/"><Button ghost>返回主页</Button></Link>
                 </div>
 
                 {/*用户填写报题信息的对话框*/}
@@ -240,7 +241,6 @@ class Workbench extends Component{
                         <CardContainer />
                     </div>
                 </div>
-                <Link className="return-home" to="/">返回主页</Link>
             </div>
         )
     }
