@@ -3,6 +3,7 @@ import bgi from '../../img/circle.png';
 import { Menu, Dropdown, Icon, Modal } from 'antd';
 import {Pencil, Clip} from '../../widget';
 //TODO：card所需的modal已就绪，下面要梳理card相关业务的数据流。action和reducer已就绪，等待绑定container和component。
+//TODO：不同的modal如members，如何取数据？ 数据持久化到服务端以及通过socket广播出去。
 class Card extends Component{
     constructor(props){
         super(props);
@@ -133,6 +134,7 @@ class Card extends Component{
     }
     render(){
         const cardsList = this.props.cardsList;
+
         return (
             <div className="cards-board-inner">
                 {cardsList ?
@@ -164,9 +166,12 @@ class Card extends Component{
                                 </div>
                                 <div className="card-item card-document">
                                     <Pencil />
+                                    {/*error:Objects are not valid as a React child.
+                                      *里是p标签内的doc是个对象造成的。
+                                      *必须是string，使用doc.content就可以了。*/}
                                     {item.document
-                                        ? item.document.map((doc) => <p>{doc}</p>)
-                                        : <p>document</p>}
+                                        ? <div>{item.document.map((doc, index) => <p key={index}>{doc.content}</p>)}</div>
+                                        : <p>No document</p>}
                                 </div>
                                 <div className="card-item card-accessory">
                                     <Clip />

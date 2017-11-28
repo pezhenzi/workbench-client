@@ -44,7 +44,7 @@ const cardReducer = (state={
             const documentIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
             if(documentIndex){
                 const documentCardsList = state.cardsList;
-                documentCardsList[documentIndex].document = action.document;
+                documentCardsList[documentIndex].document = [action.document];
                 return {...state, cardsList:[...documentCardsList]};
             } else{
                 return state;
