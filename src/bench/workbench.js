@@ -112,7 +112,6 @@ class Workbench extends Component{
     //TODO:新建卡片时，责编编辑内容；卡片active时，其他人添加资料或附件；文章编辑和上传；责编控制项目进度。
     render(){
         const currentReport = this.props.currentReport;
-        console.log(currentReport);
         return (
             <div>
                 <HeaderContainer />

@@ -15,6 +15,7 @@ class Card extends Component{
                 accessoryVisible:false,
             },
             showedModal:'',
+            currentTitle:'',
         };
         this.menu = (
             <Menu>
@@ -71,25 +72,55 @@ class Card extends Component{
             </Menu>
         );
     }
+    getCurrentCardData(e){
+        const index = e.currentTarget.getAttribute('data-cardIndex');
+        const data = this.props.cardsList[index];
+        this.props.getCurrentCard(data);
+    }
     showModal(e){
-        console.log(e.target);
         const title = e.target.title;
         this.setState({
             visible:{[`${title}Visible`]:true},
             showedModal:`${title}Visible`,
+            currentTitle:title,
         })
     }
     handleOk(){
+        const title = this.state.currentTitle;
         this.setState({
             visible:{[`${this.state.showedModal}`]:false},
             showedModal:'',
         });
+        const formData = {
+            title:this[`${title}TitleInput`].value,
+            content:this[`${title}ContentInput`].value,
+        };
+        const cardId = this.props.currentCard.cardId;
+        switch(title){
+            case 'document':
+                this.props.addDocument(cardId, formData);
+                break;
+            case 'comment':
+                this.props.addComment(cardId, formData);
+                break;
+            case 'members':
+                this.props.addMembers(cardId, formData);
+                break;
+            case 'article':
+                this.props.addArticle(cardId, formData);
+                break;
+            case 'accessory':
+                this.props.addAccessory(cardId, formData);
+        }
+        this[`${title}Form`].reset();
     }
     handleCancel(){
+        const title = this.state.currentTitle;
         this.setState({
             visible:{[`${this.state.showedModal}`]:false},
             showedModal:'',
         });
+        this[`${title}Form`].reset();
     }
     handleCompleteCard(e){
 
@@ -112,7 +143,10 @@ class Card extends Component{
                                     <p>{item.title}</p>
                                     <div className="dropdown">
                                         <Dropdown overlay={this.menu} trigger={['click']}>
-                                            <a style={{color:'#fe9'}} href="#">
+                                            <a style={{color:'#fe9'}} href="#"
+                                               id={index}
+                                               data-cardIndex={index}
+                                               onClick={this.getCurrentCardData.bind(this)}>
                                                 <Icon type="ellipsis" />
                                             </a>
                                         </Dropdown>
@@ -130,7 +164,9 @@ class Card extends Component{
                                 </div>
                                 <div className="card-item card-document">
                                     <Pencil />
-                                    <p>document</p>
+                                    {item.document
+                                        ? item.document.map((doc) => <p>{doc}</p>)
+                                        : <p>document</p>}
                                 </div>
                                 <div className="card-item card-accessory">
                                     <Clip />
@@ -163,12 +199,12 @@ class Card extends Component{
                     width='50%'
                 >
                     <div className="report-from-wrap">
-                        <form ref={(form) => this.reportForm = form}>
+                        <form ref={(form) => this.documentForm = form}>
                             <div className='report-modal-input-wrap'>
                                 <div className='report-modal-input-label'><p>标题</p></div>
                                 <div className="report-modal-input">
                                     <input type="text" name='title' required
-                                           ref={(input) => this.titleInput = input}
+                                           ref={(input) => this.documentTitleInput = input}
                                     />
                                 </div>
                             </div>
@@ -176,7 +212,7 @@ class Card extends Component{
                                 <div className='report-modal-input-label'><p>内容</p></div>
                                 <div className="form-group report-modal-input">
                                     <textarea rows="8" required name='content'
-                                              ref={(textarea) => this.contentInput = textarea}
+                                              ref={(textarea) => this.documentContentInput = textarea}
                                     />
                                 </div>
                             </div>
