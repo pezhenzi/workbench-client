@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import bgi from '../../img/circle.png';
 import { Menu, Dropdown, Icon, Modal, Upload, Button } from 'antd';
+import {Editor, EditorState} from 'draft-js';
 import {Pencil, Clip} from '../../widget';
-//TODO：card所需的modal已就绪，下面要梳理card相关业务的数据流。action和reducer已就绪，等待绑定container和component。
-//TODO：不同的modal如members，如何取数据？ 数据持久化到服务端以及通过socket广播出去。
-//TODO:处理文件上传；  处理富文本编辑器。
+
+//TODO：数据持久化到服务端以及通过socket广播出去。
+//TODO: 处理富文本编辑器。
+
 class Card extends Component{
     constructor(props){
         super(props);
@@ -18,6 +20,7 @@ class Card extends Component{
             },
             showedModal:'',
             currentTitle:'',
+            editorState:EditorState.createEmpty(),
         };
         this.menu = (
             <Menu>
@@ -74,6 +77,7 @@ class Card extends Component{
             </Menu>
         );
         this.handleUpload = this.handleUpload.bind(this);
+        this.onChange = (editorState) => this.setState({editorState});
     }
     getCurrentCardData(e){
         const index = e.currentTarget.getAttribute('data-cardIndex');
@@ -150,12 +154,13 @@ class Card extends Component{
         const that = this;
         const cardId = this.props.currentCard.cardId;
         const input = this.uploadInput;
-        console.log(input.files);
         let data = new FormData();
-        data.append('file', input.files);
+        //向FormData添加多个文件时，必须用循环的方式逐个添加，而不能直接添加一个包含多个文件的数组。
+        for(let i=0; i<input.files.length; i++){
+            data.append(`file${i}`, input.files[i]);
+        }
+
         data.append('cardId', cardId);
-        console.log(data.get("file"));
-        console.log(data.get("cardId"));
         fetch('http://10.10.60.47:3000/card/upload-file',
             {
                 method: 'POST',
@@ -165,7 +170,7 @@ class Card extends Component{
             return res.json();
         }).then(function(res){
             console.log(res);
-            //that.props.addAccessory(cardId, res);
+            that.props.addAccessory(cardId, res);
         });
     }
     render(){
@@ -336,6 +341,7 @@ class Card extends Component{
                     width='50%'
                 >
                     <h2>如果选题的稿件已经完成，请在此处上传。</h2>
+                    <Editor editorState={this.state.editorState} onChange={this.onChange} />
                 </Modal>
             </div>
         )

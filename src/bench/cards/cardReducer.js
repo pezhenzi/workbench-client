@@ -97,7 +97,7 @@ const cardReducer = (state={
             const accessoryIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
             if(accessoryIndex){
                 const accessoryCardsList = state.cardsList;
-                accessoryCardsList[accessoryIndex].accessory = action.accessory;
+                accessoryCardsList[accessoryIndex].accessory.push(action.accessory.paths);
                 return {...state, cardsList:[...accessoryCardsList]};
             } else{
                 return state;
