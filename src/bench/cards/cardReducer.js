@@ -10,9 +10,14 @@ const cardReducer = (state={
     switch(action.type){
         case cardAction.DROP_CARD:
             const cardIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            const frontList = state.cardsList.slice(0, cardIndex);
-            const backList = state.cardsList.slice(cardIndex+1);
-            return {...state, cardsList:[...frontList, ...backList]};
+            const willDrop = state.cardsList[cardIndex];
+            const willDropList = state.cardsList;
+            willDropList.splice(cardIndex, 1);
+            return {
+                ...state,
+                cardsList:[...willDropList],
+                droppedCards:[willDrop, ...state.droppedCards],
+            };
         case cardAction.ADD_CARD:
             //注意，数据在前后端传递时的格式，务必一致，经常在这里出问题！
             if(Object.prototype.toString.call(action.cardData) === '[object Array]'){ //判断变量为数组的标准方法
@@ -24,7 +29,13 @@ const cardReducer = (state={
             //完成卡片，项目正常结束。
             const completeIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
             const willComplete = state.cardsList[completeIndex];
-            return {...state, completedCards:[willComplete, ...state.completedCards]};
+            const delOneWillCom = state.cardsList;
+            delOneWillCom.splice(completeIndex, 1);
+            return {
+                ...state,
+                completedCards:[willComplete, ...state.completedCards],
+                cardsList:[...delOneWillCom],
+            };
         case cardAction.TOP_CARD:
             //将卡片置于卡片区域的最左侧
             const topIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
@@ -35,7 +46,13 @@ const cardReducer = (state={
         case cardAction.HANGUP_CARD:
             const hangIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
             const willHanged = state.cardsList[hangIndex];
-            return {...state, hangedCards:[willHanged, ...state.hangedCards]};
+            const delWillHang = state.cardsList;
+            delWillHang.splice(hangIndex, 1);
+            return {
+                ...state,
+                hangedCards:[willHanged, ...state.hangedCards],
+                cardsList:[...delWillHang],
+            };
             //选题未按时完结，需要延后交稿和发布。
             return state;
         case cardAction.CURRENT_CARD:
@@ -44,7 +61,7 @@ const cardReducer = (state={
             const documentIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
             if(documentIndex){
                 const documentCardsList = state.cardsList;
-                documentCardsList[documentIndex].document = [action.document];
+                documentCardsList[documentIndex].documents.push(action.document);
                 return {...state, cardsList:[...documentCardsList]};
             } else{
                 return state;
@@ -62,7 +79,7 @@ const cardReducer = (state={
             const commentIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
             if(commentIndex){
                 const commentCardsList = state.cardsList;
-                commentCardsList[commentIndex].comment = action.comment;
+                commentCardsList[commentIndex].comments.push(action.comment);
                 return {...state, cardsList:[...commentCardsList]};
             } else{
                 return state;

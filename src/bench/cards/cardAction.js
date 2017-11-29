@@ -17,10 +17,9 @@ export const topCard = (id) => ({
     cardId:id,
 });
 
-export const completeCard = (id, data) => ({
+export const completeCard = (id) => ({
     type:cardAction.COMPLETE_CARD,
     cardId:id,
-    cardData:data,
     timestamp:Date.now(),
 });
 

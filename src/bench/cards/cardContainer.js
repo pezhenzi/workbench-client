@@ -31,6 +31,15 @@ const mapDispatchToProps = (dispatch) => {
         addAccessory:(id, data) => {
             dispatch(cardAction.addAccessory(id, data));
         },
+        completeCard:(id) => {
+            dispatch(cardAction.completeCard(id));
+        },
+        hangupCard:(id) => {
+            dispatch(cardAction.hangUpCard(id));
+        },
+        dropCard:(id) => {
+            dispatch(cardAction.dropCard(id));
+        },
     }
 };
 

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import bgi from '../../img/circle.png';
-import { Menu, Dropdown, Icon, Modal } from 'antd';
+import { Menu, Dropdown, Icon, Modal, Upload, Button } from 'antd';
 import {Pencil, Clip} from '../../widget';
 //TODO：card所需的modal已就绪，下面要梳理card相关业务的数据流。action和reducer已就绪，等待绑定container和component。
 //TODO：不同的modal如members，如何取数据？ 数据持久化到服务端以及通过socket广播出去。
+//TODO:处理文件上传；  处理富文本编辑器。
 class Card extends Component{
     constructor(props){
         super(props);
@@ -72,6 +73,7 @@ class Card extends Component{
                 </Menu.Item>
             </Menu>
         );
+        this.handleUpload = this.handleUpload.bind(this);
     }
     getCurrentCardData(e){
         const index = e.currentTarget.getAttribute('data-cardIndex');
@@ -88,31 +90,39 @@ class Card extends Component{
     }
     handleOk(){
         const title = this.state.currentTitle;
+        const cardId = this.props.currentCard.cardId;
+
+        if(title === 'accessory'){
+            this.setState({
+                visible:{[`${this.state.showedModal}`]:false},
+                showedModal:'',
+            });
+            this[`${title}Form`].reset();
+        } else{
+            const formData = {
+                title:this[`${title}TitleInput`] ? this[`${title}TitleInput`].value : '',
+                content:this[`${title}ContentInput`].value,
+            };
+
+            switch(title){
+                case 'document':
+                    this.props.addDocument(cardId, formData);
+                    break;
+                case 'comment':
+                    this.props.addComment(cardId, formData);
+                    break;
+                case 'members':
+                    this.props.addMembers(cardId, formData);
+                    break;
+                case 'article':
+                    this.props.addArticle(cardId, formData);
+            }
+        }
+
         this.setState({
             visible:{[`${this.state.showedModal}`]:false},
             showedModal:'',
         });
-        const formData = {
-            title:this[`${title}TitleInput`].value,
-            content:this[`${title}ContentInput`].value,
-        };
-        const cardId = this.props.currentCard.cardId;
-        switch(title){
-            case 'document':
-                this.props.addDocument(cardId, formData);
-                break;
-            case 'comment':
-                this.props.addComment(cardId, formData);
-                break;
-            case 'members':
-                this.props.addMembers(cardId, formData);
-                break;
-            case 'article':
-                this.props.addArticle(cardId, formData);
-                break;
-            case 'accessory':
-                this.props.addAccessory(cardId, formData);
-        }
         this[`${title}Form`].reset();
     }
     handleCancel(){
@@ -123,14 +133,40 @@ class Card extends Component{
         });
         this[`${title}Form`].reset();
     }
-    handleCompleteCard(e){
-
+    handleCompleteCard(){
+        const cardId = this.props.currentCard.cardId;
+        this.props.completeCard(cardId);
     }
     handleHangupCard(e){
-
+        const cardId = this.props.currentCard.cardId;
+        this.props.hangupCard(cardId);
     }
     handleDropCard(e){
-
+        const cardId = this.props.currentCard.cardId;
+        this.props.dropCard(cardId);
+    }
+    handleUpload(e){
+        e.preventDefault();
+        const that = this;
+        const cardId = this.props.currentCard.cardId;
+        const input = this.uploadInput;
+        console.log(input.files);
+        let data = new FormData();
+        data.append('file', input.files);
+        data.append('cardId', cardId);
+        console.log(data.get("file"));
+        console.log(data.get("cardId"));
+        fetch('http://10.10.60.47:3000/card/upload-file',
+            {
+                method: 'POST',
+                body: data,
+            }
+        ).then(function(res){
+            return res.json();
+        }).then(function(res){
+            console.log(res);
+            //that.props.addAccessory(cardId, res);
+        });
     }
     render(){
         const cardsList = this.props.cardsList;
@@ -169,8 +205,9 @@ class Card extends Component{
                                     {/*error:Objects are not valid as a React child.
                                       *里是p标签内的doc是个对象造成的。
                                       *必须是string，使用doc.content就可以了。*/}
-                                    {item.document
-                                        ? <div>{item.document.map((doc, index) => <p key={index}>{doc.content}</p>)}</div>
+                                    <label>资料</label>
+                                    {item.documents
+                                        ? <div>{item.documents.map((doc, index) => <p key={index}>{doc.content}</p>)}</div>
                                         : <p>No document</p>}
                                 </div>
                                 <div className="card-item card-accessory">
@@ -186,7 +223,10 @@ class Card extends Component{
                                     </ul>
                                 </div>
                                 <div className="card-item card-comments">
-                                    <p>comments</p>
+                                    <label>评论</label>
+                                    {item.comments
+                                        ? <div>{item.comments.map((comment, index) => <p key={index}>{comment.content}</p>)}</div>
+                                        : <p>No comment</p>}
                                 </div>
                                 <div className="card-item card-progress">
                                     <p>progress</p>
@@ -244,7 +284,25 @@ class Card extends Component{
                     className='report-modal'
                     width='50%'
                 >
-                    <h2>从本地上传选题相关的文件，包括图片、音频和视频</h2>
+                    <h3>从本地上传选题相关的文件，包括图片、音频和视频</h3>
+                    <div className="report-from-wrap">
+                        <form
+                            ref={(form) => this.accessoryForm = form}
+                            encType="multipart/form-data"
+                            onSubmit={this.handleUpload}
+                        >
+                            <div className='report-modal-input-wrap'>
+                                <div className='report-modal-input-label'><p>请选择文件</p></div>
+                                <div className="form-group report-modal-input">
+                                    <input type="file" ref={(input) => this.uploadInput = input} multiple='multiple'/>
+                                </div>
+                                <div className="form-group report-modal-input">
+                                    <input type="submit" value="Submit" className="btn btn-primary"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                 </Modal>
                 <Modal
                     title="发表评论"
@@ -255,7 +313,18 @@ class Card extends Component{
                     className='report-modal'
                     width='50%'
                 >
-                    <h2>对于这个选题，发表你的看法。</h2>
+                    <div className="report-from-wrap">
+                        <form ref={(form) => this.commentForm = form}>
+                            <div className='report-modal-input-wrap'>
+                                <div className='report-modal-input-label'><p>说点啥吧</p></div>
+                                <div className="form-group report-modal-input">
+                                    <textarea rows="8" required
+                                              ref={(textarea) => this.commentContentInput = textarea}
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </Modal>
                 <Modal
                     title="上传稿件"
