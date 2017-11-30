@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, Route, NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import HeaderContainer from '../home/headerContainer';
 import { Menu, Icon, Button, Modal} from 'antd';
 import PoolContainer from './pool/poolContainer';
@@ -24,17 +24,18 @@ class Workbench extends Component{
             membersDisplay:'none',
         };
         this.home = io.connect('http://10.10.60.47:3000');  //在constructor中声明属性，要加this.
+        this.showModal = this.showModal.bind(this);
     }
 
     componentDidMount(){
         //
     }
-    showModal = () => {
+    showModal(e){
         this.setState({
             reportModalVisible: true,
         });
     };
-    handleOk = (e) => {
+    handleOk(e){
         const author = localStorage.user_account || this.props.account || `佚名`;
         let reportFormData = {
             title:this.titleInput.value,
@@ -47,13 +48,13 @@ class Workbench extends Component{
         this.setState({reportModalVisible: false});
         this.reportForm.reset();
     };
-    handleCancel = (e) => {
+    handleCancel(e){
         this.setState({
             reportModalVisible: false,
         });
         this.reportForm.reset();
     };
-    handleChange = (e) => {
+    handleChange(e){
         const target = e.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -83,6 +84,10 @@ class Workbench extends Component{
             editorIdea:this.cardIdeaInput.value,
             journalist:this.inviteInput.value,
             createTime:Date.now(),
+            status:'active',
+            comments:[],
+            accessory:[],
+            documents:[],
         };
         let formData = new FormData();
         formData.append('cardId', cardId);

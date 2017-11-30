@@ -59,7 +59,7 @@ const cardReducer = (state={
             return {...state, currentCard:action.cardData};
         case cardAction.ADD_DOCUMENT:
             const documentIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            if(documentIndex){
+            if(documentIndex > -1){
                 const documentCardsList = state.cardsList;
                 documentCardsList[documentIndex].documents.push(action.document);
                 return {...state, cardsList:[...documentCardsList]};
@@ -68,7 +68,7 @@ const cardReducer = (state={
             }
         case cardAction.ADD_MEMBERS:
             const membersIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            if(membersIndex){
+            if(membersIndex > -1){
                 const membersCardsList = state.cardsList;
                 membersCardsList[membersIndex].members = action.members;
                 return {...state, cardsList:[...membersCardsList]};
@@ -77,7 +77,7 @@ const cardReducer = (state={
             }
         case cardAction.ADD_COMMENT:
             const commentIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            if(commentIndex){
+            if(commentIndex > -1){
                 const commentCardsList = state.cardsList;
                 commentCardsList[commentIndex].comments.push(action.comment);
                 return {...state, cardsList:[...commentCardsList]};
@@ -86,7 +86,7 @@ const cardReducer = (state={
             }
         case cardAction.ADD_ARTICLE:
             const articleIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            if(articleIndex){
+            if(articleIndex > -1){
                 const articleCardsList = state.cardsList;
                 articleCardsList[articleIndex].article = action.article;
                 return {...state, cardsList:[...articleCardsList]};
@@ -95,7 +95,7 @@ const cardReducer = (state={
             }
         case cardAction.ADD_ACCESSORY:
             const accessoryIndex = state.cardsList.findIndex((item) => item.cardId === action.cardId);
-            if(accessoryIndex){
+            if(accessoryIndex > -1){
                 const accessoryCardsList = state.cardsList;
                 accessoryCardsList[accessoryIndex].accessory.push(action.accessory.paths);
                 return {...state, cardsList:[...accessoryCardsList]};
