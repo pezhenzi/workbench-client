@@ -20,7 +20,7 @@ header{
     top:0;
 }
 header h1{
-    color: #c7ceb2;
+    color: #fff;
     display: inline-block;
 }
 .log-btn{
@@ -347,4 +347,11 @@ header h1{
     position: absolute;
     top:-3px;
     left:90%;
+}
+.logout-interface{
+    position: absolute;
+    top:150px;
+    bottom:0;
+    text-align: center;
+    width:100%;
 }

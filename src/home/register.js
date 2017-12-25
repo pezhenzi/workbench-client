@@ -27,7 +27,6 @@ class Register extends Component{
         }).then(function(res){
             console.log(res);
         });
-        this.props.handleSubmit(registerData);
     }
 
     render(){

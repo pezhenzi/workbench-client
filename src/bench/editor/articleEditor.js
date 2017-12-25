@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { EditorState } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
+//TODO:编辑器中上传本地图片
 function uploadImageCallBack(file) {
     return new Promise(
         (resolve, reject) => {
@@ -35,7 +36,8 @@ class ArticleEditor extends Component {
     onEditorStateChange(editorState){
         this.setState({
             editorState,
-        }, () => {console.log(this.state.editorState)});
+        });
+        console.log(convertToRaw(this.state.editorState.getCurrentContent()));
     };
 
     render() {

@@ -28,7 +28,7 @@ class Home extends Component{
                         <Route path='/stat' component={Statistics}/>
                         <Route path='/msg' component={Message}/>
                         <Route path='/login' component={() => <Login getToken={this.props.getToken} />}/>
-                        <Route path='/register' component={() => <Register handleSubmit={this.handleSubmit}/>}/>
+                        <Route path='/register' component={Register}/>
                         <Route path='/' render={()=>this.props.token ? (
                             <div className="home-main">
                                 <HeaderContainer />
@@ -64,7 +64,13 @@ class Home extends Component{
                             </div>
                         ) : (<div>
                             <HeaderContainer />
-                            <h1>请先登录，如果还没有账号请先注册。</h1></div>)} />
+                            <div className="logout-interface">
+                                <h4>请先登录; 如果还没有账号,请先注册。</h4>
+                                <Login getToken={this.props.getToken} />
+                            </div>
+
+                        </div>)
+                        } />
                     </Switch>
                 </Router>
             </div>

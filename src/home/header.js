@@ -23,7 +23,7 @@ class Header extends Component{
     render(){
         return (
             <header>
-                <h1>This is common header</h1>
+                <h1>江南晚报融媒体工作台</h1>
                 <div className='log-btn'>
                     <Link to={this.props.token ? '#' : '/login'} >
                         <li>
